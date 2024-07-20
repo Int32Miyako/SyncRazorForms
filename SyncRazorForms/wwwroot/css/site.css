@@ -1,0 +1,67 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+table {
+  width: 100%; /* Задает ширину таблицы */
+  border-collapse: collapse; /* Убирает двойные границы между ячейками */
+  text-align: left; /* Выравнивание текста в ячейках по левому краю */
+  font-family: 'Arial', sans-serif; /* Шрифт текста */
+}
+
+th, td {
+  border: 1px solid #bbb; /* Граница ячеек в серых тонах */
+  padding: 8px; /* Отступы вокруг текста внутри ячеек */
+}
+
+th {
+  background-color: #ddd; /* Серый фон для заголовков таблицы */
+  color: #333; /* Темно-серый цвет текста заголовков таблицы */
+}
+
+tr:nth-child(even) {
+  background-color: #eee; /* Более светлый оттенок серого для четных строк */
+}
+
+tr:hover {
+  background-color: #ccc; /* Более темный оттенок серого при наведении мышью на строку */
+}
+
+/* Стилизация заголовка таблицы */
+caption {
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+  background-color: #f3f3f3; /* Светлый серый фон для заголовка таблицы */
+  color: #222; /* Цвет текста заголовка */
+}
+
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: black; /* Или любой другой цвет в соответствии с вашим дизайном */
+  color: white; /* Или другой цвет текста */
+  z-index: 1000; /* Убедитесь, что футер будет поверх других элементов. */
+}

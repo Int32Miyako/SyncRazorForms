@@ -1,0 +1,78 @@
+﻿@model IndexModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    var products = Model.Products;
+    
+    var isUpdate = false;
+    ProductModel? productToUpdate = null;
+
+    if (TempData["productToUpdate"] != null)
+    {
+        productToUpdate = System.Text.Json.JsonSerializer.
+            Deserialize<ProductModel>(TempData["productToUpdate"]?.ToString()!);
+        isUpdate = true;
+    }
+}
+
+<div class="text-center">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var product in products!)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Cost</td>
+                <td>@product.Amount</td>
+                <td>
+                    <button onclick="OnClickUpdate(@product.Id)"> RED </button>
+                    
+                    <form action="@Url.Action("BeginUpdate", "Home")" method="get">
+                        <input type="hidden" name="id" value="@product.Id">
+                        <input type="submit" value="✎"/>
+                    </form>
+                    <form action="@Url.Action("DeleteProduct", "Home")" method="post">
+                        <input type="hidden" name="id" value="@product.Id">
+                        <input type="submit" value="⌫"/>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+    
+    
+    
+    
+    <h3>Product</h3>
+    <form action="@(isUpdate ? Url.Action("UpdateProduct") : Url.Action("CreateProduct"))" method="Post">
+        ID: <br/>
+        <input type="number" name="id" value="@(isUpdate ? productToUpdate?.Id : "")" readonly/> <br/>
+        Имя: <br/>
+        <input type="text" name="name" value="@(isUpdate ? productToUpdate?.Name : "")"/> <br/>
+        Описание: <br/>
+        <input type="text" name="description" value="@(isUpdate ? productToUpdate?.Description : "")"/> <br/>
+        Стоимость: <br/>
+        <input type="text" name="cost" value="@(isUpdate ? productToUpdate?.Cost : "")"/> <br/>
+        Количество: <br/>
+        <input type="number" name="amount" value="@(isUpdate ? productToUpdate?.Amount : "")"/> <br/>
+        
+        <input type="submit" value="@(isUpdate ? "Update" : "Send")"/>
+    </form>
+</div>
+
+
+<script>
+    function OnClickUpdate(id){
+        alert(`Hello ${id}`); //интерполяция
+    }
+</script>
