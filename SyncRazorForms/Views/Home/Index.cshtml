@@ -10,7 +10,8 @@
     if (TempData["productToUpdate"] != null)
     {
         productToUpdate = System.Text.Json.JsonSerializer.
-            Deserialize<ProductModel>(TempData["productToUpdate"]?.ToString()!);
+            Deserialize<ProductModel>(TempData["productToUpdate"]?.
+                ToString()!);
         isUpdate = true;
     }
 }
@@ -26,32 +27,53 @@
             <th>Action</th>
         </tr>
 
-        @foreach (var product in products!)
+        @for (var i = 0; i < products!.Count; i++)
         {
             <tr>
-                <td>@product.Id</td>
-                <td>@product.Name</td>
-                <td>@product.Description</td>
-                <td>@product.Cost</td>
-                <td>@product.Amount</td>
+                <td>@products[i].Id</td>
+                
                 <td>
-                    <button onclick="OnClickUpdate(@product.Id)"> RED </button>
-                    
+                    <div id="name_id_@products[i].Id">
+                        @products[i].Name
+                    </div>
+                </td>
+                
+                <td>
+                    <div id="description_id_@products[i].Id">
+                        @products[i].Description
+                    </div>
+                </td>
+                
+                <td>
+                    <div id="cost_id_@products[i].Id">
+                        @products[i].Cost
+                    </div>
+                </td>
+                
+                <td>
+                    <div id="amount_id_@products[i].Id">
+                        @products[i].Amount
+                    </div>
+                </td>
+                
+                <td>
+                    <button onclick="OnEditClick(@products[i].Id)" id="editButton_id_@products[i].Id" > edit </button>
+                    <button onclick="onEditSaveClick(@products[i].Id)" id="yesButton_id_@products[i].Id" style="display: none;"> yes </button>
+                    <button onclick="onEditCancelClick(@products[i].Id)" id="noButton_id_@products[i].Id" style="display: none;" > no </button>
+
                     <form action="@Url.Action("BeginUpdate", "Home")" method="get">
-                        <input type="hidden" name="id" value="@product.Id">
+                        <input type="hidden" name="id" value="@products[i].Id">
                         <input type="submit" value="✎"/>
                     </form>
+                    
                     <form action="@Url.Action("DeleteProduct", "Home")" method="post">
-                        <input type="hidden" name="id" value="@product.Id">
+                        <input type="hidden" name="id" value="@products[i].Id">
                         <input type="submit" value="⌫"/>
                     </form>
                 </td>
             </tr>
         }
     </table>
-    
-    
-    
     
     <h3>Product</h3>
     <form action="@(isUpdate ? Url.Action("UpdateProduct") : Url.Action("CreateProduct"))" method="Post">
@@ -62,7 +84,7 @@
         Описание: <br/>
         <input type="text" name="description" value="@(isUpdate ? productToUpdate?.Description : "")"/> <br/>
         Стоимость: <br/>
-        <input type="text" name="cost" value="@(isUpdate ? productToUpdate?.Cost : "")"/> <br/>
+        <input type="number" name="cost" value="@(isUpdate ? productToUpdate?.Cost : "")"/> <br/>
         Количество: <br/>
         <input type="number" name="amount" value="@(isUpdate ? productToUpdate?.Amount : "")"/> <br/>
         
@@ -71,8 +93,3 @@
 </div>
 
 
-<script>
-    function OnClickUpdate(id){
-        alert(`Hello ${id}`); //интерполяция
-    }
-</script>
