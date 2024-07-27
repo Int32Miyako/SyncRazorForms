@@ -347,3 +347,7 @@ C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\obj\Debug\net6
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\obj\Debug\net6.0\SyncRazorForms.pdb
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\obj\Debug\net6.0\SyncRazorForms.genruntimeconfig.cache
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\obj\Debug\net6.0\ref\SyncRazorForms.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll

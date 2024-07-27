@@ -33,25 +33,27 @@
                 <td>@products[i].Id</td>
                 
                 <td>
-                    <div id="name_id_@products[i].Id">
+                    <div id="name_text_id_@products[i].Id">
                         @products[i].Name
                     </div>
                 </td>
                 
+                
                 <td>
-                    <div id="description_id_@products[i].Id">
+                    <div id="description_text_id_@products[i].Id">
                         @products[i].Description
                     </div>
                 </td>
                 
+                
                 <td>
-                    <div id="cost_id_@products[i].Id">
+                    <div id="cost_text_id_@products[i].Id">
                         @products[i].Cost
                     </div>
                 </td>
                 
                 <td>
-                    <div id="amount_id_@products[i].Id">
+                    <div id="amount_text_id_@products[i].Id">
                         @products[i].Amount
                     </div>
                 </td>
@@ -61,6 +63,9 @@
                     <button onclick="onEditSaveClick(@products[i].Id)" id="yesButton_id_@products[i].Id" style="display: none;"> yes </button>
                     <button onclick="onEditCancelClick(@products[i].Id)" id="noButton_id_@products[i].Id" style="display: none;" > no </button>
 
+                    <button onclick="onRefreshClick(@products[i].Id)" >🗘</button>
+                            
+                            
                     <form action="@Url.Action("BeginUpdate", "Home")" method="get">
                         <input type="hidden" name="id" value="@products[i].Id">
                         <input type="submit" value="✎"/>
@@ -91,5 +96,6 @@
         <input type="submit" value="@(isUpdate ? "Update" : "Send")"/>
     </form>
 </div>
+
 
 

@@ -1,111 +1,149 @@
 ﻿let originalValues = {};
 
-function OnEditClick(id) {
-    let name = document.getElementById(`name_id_${id}`);
-    let description = document.getElementById(`description_id_${id}`);
-    let cost = document.getElementById(`cost_id_${id}`);
-    let amount = document.getElementById(`amount_id_${id}`);
+function GetElementsById(id, isInput = false) {
+    let name = document.getElementById(
+        `name_${isInput?"input":"text"}_id_${id}`);
+    
+    let description = document.getElementById(
+        `description_${isInput?"input":"text"}_id_${id}`);
+    
+    let cost = document.getElementById(
+        `cost_${isInput?"input":"text"}_id_${id}`);
+    
+    let amount = document.getElementById(
+        `amount_${isInput?"input":"text"}_id_${id}`);
 
-    originalValues[id] = {
-        name : name.innerText,
-        description : description.innerText,
-        cost : cost.innerText,
-        amount : amount.innerText
+    return {
+        name,
+        description,
+        cost,
+        amount
     }
-    
-    let inputName           = document.createElement("input");
-    let inputDescription = document.createElement("input");
-    let inputCost       = document.createElement("input");
-    let inputAmount      = document.createElement("input");
-    
-    inputName.id        = `input_name_id_${id}`;
-    inputDescription.id = `input_description_id_${id}`;
-    inputCost.id        = `input_cost_id_${id}`;
-    inputAmount.id      = `input_amount_id_${id}`;
-    
-    inputName.value        = name.innerText;
-    inputDescription.value = description.innerText;
-    inputCost.value        = cost.innerText;
-    inputAmount.value      = amount.innerText;
+}
 
-    name.innerHTML = "";
-    description.innerHTML = "";
-    cost.innerHTML = "";
-    amount.innerHTML = "";
+function ClearInnerHtmlOfElement(element){
+    element.name.innerHTML = "";
+    element.description.innerHTML = "";
+    element.cost.innerHTML = "";
+    element.amount.innerHTML = "";
+}
+
+function SaveOriginalElementValues(id, element) {
+    originalValues[id] = {
+        name: element.name.innerText,
+        description: element.description.innerText,
+        cost: element.cost.innerText,
+        amount: element.amount.innerText
+    }
+} 
+
+function CreateInputs(id){
+    let name = document.createElement(
+        "input");
+    let description = document.createElement(
+        "input");
+    let cost = document.createElement(
+        "input");
+    let amount = document.createElement(
+        "input");
+
+    name.id = `name_input_id_${id}`;
+    description.id = `description_input_id_${id}`;
+    cost.id = `cost_input_id_${id}`;
+    amount.id = `amount_input_id_${id}`;
     
-    name.appendChild(inputName);
-    description.appendChild(inputDescription);
-    cost.appendChild(inputCost);
-    amount.appendChild(inputAmount);
+    return {
+        name,
+        description,
+        cost,
+        amount
+    }
+}
+
+function SwapValues(originalElement, inputElement, 
+                    isChangeInputElementText = false) {
+    if (isChangeInputElementText) {
+        inputElement.name.value = originalElement.name.innerText;
+        inputElement.description.value = originalElement.description.innerText;
+        inputElement.cost.value = originalElement.cost.innerText;
+        inputElement.amount.value = originalElement.amount.innerText;
+    } else {
+        originalElement.name.innerText = inputElement.name.value;
+        originalElement.description.innerText = inputElement.description.value;
+        originalElement.cost.innerText = inputElement.cost.value;
+        originalElement.amount.innerText = inputElement.amount.value;
+    } 
+}
+
+function OnEditClick(id) {
+    let originalElement = GetElementsById(id);
+
+    SaveOriginalElementValues(id, originalElement);
+
+    let inputElement = CreateInputs(id);
+
+    SwapValues(originalElement, inputElement, true);
+
+    ClearInnerHtmlOfElement(originalElement);
+
+    originalElement.name.appendChild(inputElement.name);
+    originalElement.description.appendChild(inputElement.description);
+    originalElement.cost.appendChild(inputElement.cost);
+    originalElement.amount.appendChild(inputElement.amount);
 
     showYesNoButtons(id);
 }
 
-function onEditSaveClick(id){
-    let name        = document.getElementById(`name_id_${id}`);
-    let description = document.getElementById(`description_id_${id}`);
-    let cost        = document.getElementById(`cost_id_${id}`);
-    let amount      = document.getElementById(`amount_id_${id}`);
+function onEditSaveClick(id) {
+    let originalElement = GetElementsById(id);
 
-    let inputName       = document.getElementById(`input_name_id_${id}`);
-    let inputDescription= document.getElementById(`input_description_id_${id}`);
-    let inputCost       = document.getElementById(`input_cost_id_${id}`);
-    let inputAmount     = document.getElementById(`input_amount_id_${id}`);
+    let inputElement = GetElementsById(id, true);
 
-    name.innerText        = inputName.value;
-    description.innerText = inputDescription.value;
-    cost.innerText        = inputCost.value;
-    amount.innerText      = inputAmount.value;
+    SwapValues(originalElement, inputElement)
+
+    ClearInnerHtmlOfElement(inputElement);
     
-    inputName.innerHTML = "";
-    inputDescription.innerHTML = "";
-    inputCost.innerHTML = "";
-    inputAmount.innerHTML = "";
-
-
-    hideYesNoButtons(id);
+    showYesNoButtons(id, false);
 }
 
-function onEditCancelClick(id){
-    let name        = document.getElementById(`name_id_${id}`);
-    let description = document.getElementById(`description_id_${id}`);
-    let cost        = document.getElementById(`cost_id_${id}`);
-    let amount      = document.getElementById(`amount_id_${id}`);
+function onEditCancelClick(id) {
+    let originalElement = GetElementsById(id);
 
-    name.innerText = originalValues[id].name
-    description.innerText = originalValues[id].description
-    cost.innerText = originalValues[id].cost
-    amount.innerText = originalValues[id].amount
-
+    originalElement.name.innerText = originalValues[id].name;
+    originalElement.description.innerText = originalValues[id].description;
+    originalElement.cost.innerText = originalValues[id].cost;
+    originalElement.amount.innerText = originalValues[id].amount;
     
     
-    hideYesNoButtons(id);
+    showYesNoButtons(id, false);
 }
 
 
-
-function showYesNoButtons(id) {
+function showYesNoButtons(id, isShowButtons = true) {
     let yesButton = document.getElementById(`yesButton_id_${id}`);
-    let noButton  = document.getElementById(`noButton_id_${id}`);
-    
-    let editButton= document.getElementById(`editButton_id_${id}`);
+    let noButton = document.getElementById(`noButton_id_${id}`);
 
-   
-    yesButton.style.display = "block";
-    noButton.style.display  = "block";
+    let editButton = document.getElementById(`editButton_id_${id}`);
+
+
+    yesButton.style.display = isShowButtons ? "block" : "none";
+    noButton.style.display = isShowButtons ? "block" : "none";
+
+    editButton.style.display = isShowButtons ? "none" : "block";
     
-    editButton.style.display = "none";
+    
 }
 
-function hideYesNoButtons(id){
-    let yesButton = document.getElementById(`yesButton_id_${id}`);
-    let noButton  = document.getElementById(`noButton_id_${id}`);
+async function onRefreshClick(id) {
+    let response = await fetch(`product/${id}`)
+    let product = await response.json(); 
 
-    let editButton= document.getElementById(`editButton_id_${id}`);
+    let nameText = document.getElementById(`name_id_${id}`);
+    nameText.innerText = product.name;
 
-
-    yesButton.style.display  = "none";
-    noButton.style.display   = "none";
-
-    editButton.style.display = "block";
+    let descriptionText = document.getElementById(`name_id_${id}`);
+    descriptionText.innerText = product.description;
+    
 }
+
+

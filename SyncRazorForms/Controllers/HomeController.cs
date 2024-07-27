@@ -15,6 +15,22 @@ public class HomeController : Controller
 
     private static readonly IndexModel IndexModel = new();
 
+    
+    [HttpGet("product")]
+    public ProductModel? GetProduct(int id)
+    {
+        var products = IndexModel.Products;
+        
+        for (var i = 0; i < products?.Count; i++)
+        {
+            if(products[i].Id == id)
+                return products[i];
+        }
+        
+        return null;
+    }
+    
+    
     [HttpPost("create-product")] //сменили адрес
     public IActionResult CreateProduct([FromForm] ProductModel newProduct)
     {
