@@ -65,3 +65,39 @@ caption {
   color: white; /* Или другой цвет текста */
   z-index: 1000; /* Убедитесь, что футер будет поверх других элементов. */
 }
+
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.button-inline {
+  display: inline-block;
+}
+
+
+
+.cube {
+  width: 250px; /* Ширина кубика */
+  height: 100px; /* Высота кубика */
+  display: flex;
+  align-items: center; /* Вертикальное центрирование внутри кубика */
+  justify-content: center; /* Горизонтальное центрирование внутри кубика */
+  margin-bottom: 5px; /* Отступ снизу */
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button {
+  padding: 1px 10px; /* Отступы для кнопки */
+  font-size: 50px; /* Размер текста кнопки */
+  color: white; /* Цвет текста кнопки */
+  background-color: #ffffff; /* Цвет фона кнопки */
+  border: none; /* Без границы */
+  border-radius: 5px; /* Сглаживание углов */
+  cursor: pointer; /* Курсор при наведении */
+  
+}
+

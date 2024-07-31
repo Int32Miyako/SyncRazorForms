@@ -1,124 +1,4 @@
 ﻿let originalValues = {};
-
-function GetElementsById(id, isInput = false) {
-    let name = document.getElementById(
-        `name_${isInput?"input":"text"}_id_${id}`);
-    
-    let description = document.getElementById(
-        `description_${isInput?"input":"text"}_id_${id}`);
-    
-    let cost = document.getElementById(
-        `cost_${isInput?"input":"text"}_id_${id}`);
-    
-    let amount = document.getElementById(
-        `amount_${isInput?"input":"text"}_id_${id}`);
-
-    return {
-        name,
-        description,
-        cost,
-        amount
-    }
-}
-
-function ClearInnerHtmlOfElement(element){
-    element.name.innerHTML = "";
-    element.description.innerHTML = "";
-    element.cost.innerHTML = "";
-    element.amount.innerHTML = "";
-}
-
-function SaveOriginalElementValues(id, element) {
-    originalValues[id] = {
-        name: element.name.innerText,
-        description: element.description.innerText,
-        cost: element.cost.innerText,
-        amount: element.amount.innerText
-    }
-} 
-
-function CreateInputs(id){
-    let name = document.createElement(
-        "input");
-    let description = document.createElement(
-        "input");
-    let cost = document.createElement(
-        "input");
-    let amount = document.createElement(
-        "input");
-
-    name.id = `name_input_id_${id}`;
-    description.id = `description_input_id_${id}`;
-    cost.id = `cost_input_id_${id}`;
-    amount.id = `amount_input_id_${id}`;
-    
-    return {
-        name,
-        description,
-        cost,
-        amount
-    }
-}
-
-function SwapValues(originalElement, inputElement, 
-                    isChangeInputElementText = false) {
-    if (isChangeInputElementText) {
-        inputElement.name.value = originalElement.name.innerText;
-        inputElement.description.value = originalElement.description.innerText;
-        inputElement.cost.value = originalElement.cost.innerText;
-        inputElement.amount.value = originalElement.amount.innerText;
-    } else {
-        originalElement.name.innerText = inputElement.name.value;
-        originalElement.description.innerText = inputElement.description.value;
-        originalElement.cost.innerText = inputElement.cost.value;
-        originalElement.amount.innerText = inputElement.amount.value;
-    } 
-}
-
-function OnEditClick(id) {
-    let originalElement = GetElementsById(id);
-
-    SaveOriginalElementValues(id, originalElement);
-
-    let inputElement = CreateInputs(id);
-
-    SwapValues(originalElement, inputElement, true);
-
-    ClearInnerHtmlOfElement(originalElement);
-
-    originalElement.name.appendChild(inputElement.name);
-    originalElement.description.appendChild(inputElement.description);
-    originalElement.cost.appendChild(inputElement.cost);
-    originalElement.amount.appendChild(inputElement.amount);
-
-    showYesNoButtons(id);
-}
-
-function onEditSaveClick(id) {
-    let originalElement = GetElementsById(id);
-
-    let inputElement = GetElementsById(id, true);
-
-    SwapValues(originalElement, inputElement)
-
-    ClearInnerHtmlOfElement(inputElement);
-    
-    showYesNoButtons(id, false);
-}
-
-function onEditCancelClick(id) {
-    let originalElement = GetElementsById(id);
-
-    originalElement.name.innerText = originalValues[id].name;
-    originalElement.description.innerText = originalValues[id].description;
-    originalElement.cost.innerText = originalValues[id].cost;
-    originalElement.amount.innerText = originalValues[id].amount;
-    
-    
-    showYesNoButtons(id, false);
-}
-
-
 function showYesNoButtons(id, isShowButtons = true) {
     let yesButton = document.getElementById(`yesButton_id_${id}`);
     let noButton = document.getElementById(`noButton_id_${id}`);
@@ -130,20 +10,257 @@ function showYesNoButtons(id, isShowButtons = true) {
     noButton.style.display = isShowButtons ? "block" : "none";
 
     editButton.style.display = isShowButtons ? "none" : "block";
+
+
+}
+function GetProductById(id, isInput = false) {
+    let id_element = document.getElementById(
+        `id_${isInput?"input":"text"}_id_${id}`);
+
+    let name_element = document.getElementById(
+        `name_${isInput?"input":"text"}_id_${id}`);
     
+    let description_element = document.getElementById(
+        `description_${isInput?"input":"text"}_id_${id}`);
     
+    let cost_element = document.getElementById(
+        `cost_${isInput?"input":"text"}_id_${id}`);
+    
+    let amount_element = document.getElementById(
+        `amount_${isInput?"input":"text"}_id_${id}`);
+
+    return {
+        id : id_element,
+        name: name_element,
+        description: description_element,
+        cost: cost_element,
+        amount: amount_element
+    }
 }
 
-async function onRefreshClick(id) {
-    let response = await fetch(`product/${id}`)
-    let product = await response.json(); 
+function ClearInnerHtmlOfElement(element){
+    element.id.innerHTML = "";
+    element.name.innerHTML = "";
+    element.description.innerHTML = "";
+    element.cost.innerHTML = "";
+    element.amount.innerHTML = "";
+}
 
-    let nameText = document.getElementById(`name_id_${id}`);
-    nameText.innerText = product.name;
+function SaveOriginalElementValues(id, element) {
+    originalValues[id] = {
+        id: { innerText: element.id.innerText },
+        name: { innerText: element.name.innerText }, // Создаём объект с innerText
+        description: { innerText: element.description.innerText },
+        cost: { innerText: element.cost.innerText },
+        amount: { innerText: element.amount.innerText }
+    }
+} 
 
-    let descriptionText = document.getElementById(`name_id_${id}`);
-    descriptionText.innerText = product.description;
+function CreateInputs(id){
+    let id_input = document.createElement(
+        "id");
+    let name_input = document.createElement(
+        "input");
+    let description_input = document.createElement(
+        "input");
+    let cost_input = document.createElement(
+        "input");
+    let amount_input = document.createElement(
+        "input");
+
+    id_input.id = `id_input_id_${id}`;
+    name_input.id = `name_input_id_${id}`;
+    description_input.id = `description_input_id_${id}`;
+    cost_input.id = `cost_input_id_${id}`;
+    amount_input.id = `amount_input_id_${id}`;
+
+    id_input.innerText = id;
     
+    return {
+        id: id_input,
+        name: name_input,
+        description: description_input,
+        cost: cost_input,
+        amount: amount_input
+    }
+}
+
+// secondElement - элемент в который войдут значения первого
+function PutValuesOfFirstElementToSecond(firstElement, secondElement) {
+    let isSecondElementIsInput = secondElement.name.tagName === "INPUT";
+    
+   
+    if (isSecondElementIsInput) {
+        secondElement.id.value = firstElement.id.innerText;
+        secondElement.name.value = firstElement.name.innerText;
+        secondElement.description.value = firstElement.description.innerText;
+        secondElement.cost.value = firstElement.cost.innerText;
+        secondElement.amount.value = firstElement.amount.innerText;
+    } else {
+        secondElement.id.innerText = firstElement.id.value;
+        secondElement.name.innerText = firstElement.name.value;
+        secondElement.description.innerText = firstElement.description.value;
+        secondElement.cost.innerText = firstElement.cost.value;
+        secondElement.amount.innerText = firstElement.amount.value;
+    } 
+}
+
+// добавляет второму элементу дочерний первый
+function AppendChild(appendingElement, parentElement){
+    parentElement.id.appendChild(appendingElement.id);
+    parentElement.name.appendChild(appendingElement.name);
+    parentElement.description.appendChild(appendingElement.description);
+    parentElement.cost.appendChild(appendingElement.cost);
+    parentElement.amount.appendChild(appendingElement.amount);
+}
+
+async function OnEditClick(id) {
+    let originalElement = GetProductById(id);
+
+    SaveOriginalElementValues(id, originalElement);
+
+    let inputElement = CreateInputs(id);
+
+    PutValuesOfFirstElementToSecond(originalElement, inputElement);
+
+    ClearInnerHtmlOfElement(originalElement);
+
+    AppendChild(inputElement, originalElement);
+    
+    inputElement.name.focus();
+    
+    showYesNoButtons(id);
+}
+
+function onEditCancelClick(id) {
+    let finalElement = GetProductById(id);
+
+    finalElement.id.innerText = originalValues[id].id.innerText;
+    finalElement.name.innerText = originalValues[id].name.innerText;
+    finalElement.description.innerText = originalValues[id].description.innerText;
+    finalElement.cost.innerText = originalValues[id].cost.innerText;
+    finalElement.amount.innerText = originalValues[id].amount.innerText;
+
+    
+    showYesNoButtons(id, false);
 }
 
 
+
+
+async function onEditSaveClick(id){
+    let finalElement = GetProductById(id);
+
+    let inputElement = GetProductById(id, true);
+    
+    PutValuesOfFirstElementToSecond(inputElement, finalElement)
+
+    let product = getProductObjectFromElement(id);
+
+    console.log(JSON.stringify(product));
+    
+    let response = await fetch(`Product/update-product`, {
+        method : "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(product) 
+    });
+
+    
+    
+    if (!response.ok) {
+        console.error('Ошибка обновления продукта:', response.statusText);
+    }
+    
+    showYesNoButtons(id, false);
+}
+
+
+async function onCreateClick(){
+    let response = await fetch(`Product/create-product`, {
+        method : "POST"
+    });
+    
+    let idOf = await response.json();
+    
+    await addProductToUI(idOf);
+
+    await OnEditClick(idOf)
+}
+
+
+
+async function onGetProductClick(id){
+    await fetch(`Product/get-product/${id}`)
+        .then(response => response.json())
+        .then(response => alert(`
+        id = ${response.id}
+        товар = ${response.name}
+        описание = ${response.description}
+        стоимость = ${response.cost}
+        количество = ${response.amount}
+        `))
+}
+
+function addProductToUI(id) {
+    let productList = document.getElementById("productList");
+    
+    // Создание элемента для нового продукта
+    let productItem = document.createElement("tr");
+    productItem.id = `product_id_${id}`;
+    productItem.innerHTML = `
+         <td> <div id="id_text_id_${id}" </div>${id}</td>
+         <td> <div id="name_text_id_${id}"> </div> </td>
+         <td> <div id="description_text_id_${id}"> </div> </td>
+         <td> <div id="cost_text_id_${id}"> </div> </td>
+         <td> <div id="amount_text_id_${id}"> </div> </td>
+         <td>
+             <div class="buttons-container"> 
+                 <button onclick="OnEditClick(${id})" id="editButton_id_${id}" >📝</button>
+                 <button onclick="onEditSaveClick(${id})" id="yesButton_id_${id}" style="display: none;">✅</button>
+                 <button onclick="onEditCancelClick(${id})" id="noButton_id_${id}" style="display: none;">❌</button>
+             </div>
+             
+             <div class="buttons-container">
+             <button onclick="onDeleteClick(${id})" id="deleteButton_id_${id}">⌫</button>
+             <button onclick="onGetProductClick(${id})" id="getButton_id_${id}">👁</button>
+             </div>
+         </td>
+    `;
+    productList.appendChild(productItem);
+            
+}
+
+async function onDeleteClick(id){
+    let response = await fetch(`Product/delete-product/${id}`, {
+        method : "DELETE"
+    })
+
+    deleteProductFromUI(id)
+
+    if (!response.ok) {
+        console.error("Error deleting product:", response.statusText);
+    }
+}
+
+// chat gpt придумали гении для неумных личностей
+function deleteProductFromUI(id) {
+    const productItem = document.getElementById(`product_id_${id}`);
+    
+    if (productItem) {
+        productItem.remove();
+        console.log(`Продукт с ID ${id} был успешно удалён *_-`);
+    }
+}
+
+function getProductObjectFromElement(id) {
+    let product = GetProductById(id);
+    return {
+        id: product.id.innerText,
+        name: product.name.innerText || '', // Убедитесь, что вы работаете с правильными значениями
+        description: product.description.innerText || '',
+        cost: parseInt(product.cost.innerText) || 0, // Преобразование в число
+        amount: parseInt(product.amount.innerText) || 0 // Преобразование в число
+    };
+}
