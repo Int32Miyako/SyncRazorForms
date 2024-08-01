@@ -3,8 +3,8 @@
 public class ProductModel
 {
     public int Id { get; init; } 
-    public string? Name { get; set; }
-    public string? Description { get; set; }
-    public int Cost { get; set; }
-    public int Amount { get; set; }
+    public string? Name { get; init; }
+    public string? Description { get; init; }
+    public int Cost { get; init; }
+    public int Amount { get; init; }
 }

@@ -1,5 +1,4 @@
-﻿let originalValues = {};
-function showYesNoButtons(id, isShowButtons = true) {
+﻿function showYesNoButtons(id, isShowButtons = true) {
     let yesButton = document.getElementById(`yesButton_id_${id}`);
     let noButton = document.getElementById(`noButton_id_${id}`);
 
@@ -45,16 +44,6 @@ function ClearInnerHtmlOfElement(element){
     element.cost.innerHTML = "";
     element.amount.innerHTML = "";
 }
-
-function SaveOriginalElementValues(id, element) {
-    originalValues[id] = {
-        id: { innerText: element.id.innerText },
-        name: { innerText: element.name.innerText }, // Создаём объект с innerText
-        description: { innerText: element.description.innerText },
-        cost: { innerText: element.cost.innerText },
-        amount: { innerText: element.amount.innerText }
-    }
-} 
 
 function CreateInputs(id){
     let id_input = document.createElement(
@@ -105,8 +94,9 @@ function PutValuesOfFirstElementToSecond(firstElement, secondElement) {
     } 
 }
 
-// добавляет второму элементу дочерний первый
 function AppendChild(appendingElement, parentElement){
+    // добавляет второму элементу дочерний первый
+    
     parentElement.id.appendChild(appendingElement.id);
     parentElement.name.appendChild(appendingElement.name);
     parentElement.description.appendChild(appendingElement.description);
@@ -116,9 +106,6 @@ function AppendChild(appendingElement, parentElement){
 
 function OnEditClick(id) {
     let originalElement = GetProductById(id);
-
-    SaveOriginalElementValues(id, originalElement);
-
     let inputElement = CreateInputs(id);
 
     PutValuesOfFirstElementToSecond(originalElement, inputElement);
@@ -132,21 +119,22 @@ function OnEditClick(id) {
     showYesNoButtons(id);
 }
 
-function onEditCancelClick(id) {
+async function onEditCancelClick(id) {
     let finalElement = GetProductById(id);
+    let originalElement = await fetch(`Product/get-product/${id}`, {
+        method : "GET"
+    }).then(response => response.json());
+    
+    finalElement.id.innerText = originalElement.id;
+    finalElement.name.innerText = originalElement.name;
+    finalElement.description.innerText = originalElement.description;
+    finalElement.cost.innerText = originalElement.cost;
+    finalElement.amount.innerText = originalElement.amount;
 
-    finalElement.id.innerText = originalValues[id].id.innerText;
-    finalElement.name.innerText = originalValues[id].name.innerText;
-    finalElement.description.innerText = originalValues[id].description.innerText;
-    finalElement.cost.innerText = originalValues[id].cost.innerText;
-    finalElement.amount.innerText = originalValues[id].amount.innerText;
-
+    console.log("Отмена редактирования");
     
     showYesNoButtons(id, false);
 }
-
-
-
 
 async function onEditSaveClick(id){
     let finalElement = GetProductById(id);
@@ -166,10 +154,11 @@ async function onEditSaveClick(id){
         },
         body: JSON.stringify(product) 
     });
-
     
-    
-    if (!response.ok) {
+    if (response.ok) {
+        console.log(`Сохранение элемента id: ${id}`)
+    }
+    else{
         console.error('Ошибка обновления продукта:', response.statusText);
     }
     
@@ -192,7 +181,9 @@ async function onCreateClick(){
 
 
 async function onGetProductClick(id){
-    await fetch(`Product/get-product/${id}`)
+    await fetch(`Product/get-product/${id}`, {
+        method : "GET"
+    })
         .then(response => response.json())
         .then(response => alert(`
         id = ${response.id}
@@ -239,7 +230,10 @@ async function onDeleteClick(id){
 
     deleteProductFromUI(id)
 
-    if (!response.ok) {
+    if (response.ok) {
+        console.log(`Удаление объекта с ID ${id}`)
+    }
+    else{
         console.error("Error deleting product:", response.statusText);
     }
 }

@@ -9,36 +9,37 @@
     <table id="productList">
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Cost</th>
-            <th>Amount</th>
-            <th>Action</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Кол-во</th>
+            <th>Действие</th>
         </tr>
 
-        @for (var i = 0; i < products.Count; i++)
+        @foreach (var product in products)
         {
-            <tr id="product_id_@products[i].Id">
-                <td> <div id="id_text_id_@products[i].Id">@products[i].Id</div> </td>
+            <tr id="product_id_@(product.Id)">
+                <td> <div id="id_text_id_@(product.Id)">@product.Id</div> </td>
                 
-                <td> <div id="name_text_id_@products[i].Id">@products[i].Name</div> </td>
+                <td> <div id="name_text_id_@(product.Id)">@product.Name</div> </td>
                 
-                <td> <div id="description_text_id_@products[i].Id">@products[i].Description</div> </td>
+                <td> <div id="description_text_id_@(product.Id)">@product.Description</div> </td>
                 
-                <td> <div id="cost_text_id_@products[i].Id">@products[i].Cost</div> </td>
+                <td> <div id="cost_text_id_@(product.Id)">@product.Cost</div> </td>
                 
-                <td> <div id="amount_text_id_@products[i].Id">@products[i].Amount</div> </td>
+                <td> <div id="amount_text_id_@(product.Id)">@product.Amount</div> </td>
+                
                 
                 <td>
                     <div class="buttons-container">
-                        <button onclick="OnEditClick(@products[i].Id)" id="editButton_id_@products[i].Id" >📝</button>
-                        <button onclick="onEditSaveClick(@products[i].Id)" id="yesButton_id_@products[i].Id" style="display: none;">✅</button>
-                        <button onclick="onEditCancelClick(@products[i].Id)" id="noButton_id_@products[i].Id" style="display: none;" >❌</button>
+                        <button onclick="OnEditClick(@product.Id)" id="editButton_id_@(product.Id)" >📝</button>
+                        <button onclick="onEditSaveClick(@product.Id)" id="yesButton_id_@(product.Id)" style="display: none;">✅</button>
+                        <button onclick="onEditCancelClick(@product.Id)" id="noButton_id_@(product.Id)" style="display: none;" >❌</button>
                     </div>
 
                     <div class="buttons-container">
-                        <button onclick="onDeleteClick(@products[i].Id)" id="deleteButton_id_@products[i].Id">⌫</button> 
-                        <button onclick="onGetProductClick(@products[i].Id)" id="getButton_id_@products[i].Id">👁</button>
+                        <button onclick="onDeleteClick(@product.Id)" id="deleteButton_id_@(product.Id)">⌫</button> 
+                        <button onclick="onGetProductClick(@product.Id)" id="getButton_id_@(product.Id)">👁</button>
                     </div>
                 </td>
             </tr>
