@@ -114,7 +114,7 @@ function AppendChild(appendingElement, parentElement){
     parentElement.amount.appendChild(appendingElement.amount);
 }
 
-async function OnEditClick(id) {
+function OnEditClick(id) {
     let originalElement = GetProductById(id);
 
     SaveOriginalElementValues(id, originalElement);
@@ -184,9 +184,9 @@ async function onCreateClick(){
     
     let idOf = await response.json();
     
-    await addProductToUI(idOf);
+    addProductToUI(idOf);
 
-    await OnEditClick(idOf)
+    OnEditClick(idOf)
 }
 
 
@@ -228,8 +228,8 @@ function addProductToUI(id) {
              </div>
          </td>
     `;
+    
     productList.appendChild(productItem);
-            
 }
 
 async function onDeleteClick(id){
