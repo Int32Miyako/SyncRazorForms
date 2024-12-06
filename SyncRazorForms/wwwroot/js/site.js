@@ -155,6 +155,7 @@ async function onEditSaveClick(id){
         body: JSON.stringify(product) 
     });
     
+    
     if (response.ok) {
         console.log(`Сохранение элемента id: ${id}`)
     }
@@ -177,7 +178,6 @@ async function onCreateClick(){
 
     OnEditClick(idOf)
 }
-
 
 
 async function onGetProductClick(id){

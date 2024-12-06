@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
 using SyncRazorForms.Models;
 
 namespace SyncRazorForms.Controllers;
@@ -15,8 +16,10 @@ public class HomeController : Controller
     
     public IActionResult Index()
     {
+        
         return View(ProductController.IndexModel);
     }
+    
     
     public IActionResult Privacy()
     {

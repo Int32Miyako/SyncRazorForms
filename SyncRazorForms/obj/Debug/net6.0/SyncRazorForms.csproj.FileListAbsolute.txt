@@ -117,7 +117,6 @@ C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\Microsoft.Extensions.Localization.Abstractions.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\Microsoft.Extensions.Localization.dll
-C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\Microsoft.Extensions.Logging.Configuration.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\Microsoft.Extensions.Logging.Console.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\Microsoft.Extensions.Logging.Debug.dll
@@ -160,7 +159,6 @@ C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\System.Data.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\System.Diagnostics.Contracts.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\System.Diagnostics.Debug.dll
-C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\System.Diagnostics.EventLog.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\System.Diagnostics.FileVersionInfo.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\refs\System.Diagnostics.Process.dll
@@ -351,3 +349,6 @@ C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll

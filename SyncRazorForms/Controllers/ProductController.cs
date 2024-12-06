@@ -1,25 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SyncRazorForms.Models;
+using SyncRazorForms.Models.ProductTypes;
 
 namespace SyncRazorForms.Controllers;
 
 [Route("[controller]")]
 public class ProductController : ControllerBase
 {
-    public static readonly IndexModel IndexModel = new();
+    public static readonly IndexModel IndexModel;
+    
+    [HttpGet("get-products")]
+    public List<Product> GetProducts()
+    {
+        var products = IndexModel.Products;
+
+        return products;
+    }
     
     [HttpGet("get-product/{id}")]
-    public ProductModel? GetProduct([FromRoute]int id)
+    public Product? GetProduct([FromRoute]int id)
     {
         var products = IndexModel.Products;
 
         return products.FirstOrDefault(t => t.Id == id);
     }
     
+    
     [HttpPost("create-product")] 
     public int CreateProduct()
     {
-        var newProduct = new ProductModel
+        var newProduct = new Product
         {
             Id = CreateId(),
             Name = "",
@@ -35,7 +45,7 @@ public class ProductController : ControllerBase
     
     
     [HttpPut("update-product")]
-    public ProductModel? UpdateProduct([FromBody] ProductModel product)
+    public Product? UpdateProduct([FromBody] Product product)
     {
         for (var i = 0; i < IndexModel.Products.Count; i++)
         {
