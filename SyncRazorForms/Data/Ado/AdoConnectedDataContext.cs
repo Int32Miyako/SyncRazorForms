@@ -18,8 +18,6 @@ public class AdoConnectedDataContext : IDataContext
     {
         _connectionString = connectionString;
         InitializeDataSet();
-
-        ProductController.IndexModel.Products = SelectProducts().ToList();
     }
 
     private DataTable? Products => _dataSet.Tables["Products"];
