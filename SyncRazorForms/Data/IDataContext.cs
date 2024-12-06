@@ -5,7 +5,7 @@ namespace SyncRazorForms.Data
     public interface IDataContext
     {
         public Product? SelectProduct(int id);
-        public List<Product> SelectProducts();
+        public IList<Product?> SelectProducts();
         public int InsertProduct(Product product);
         
         public int UpdateProduct(Product newProduct);

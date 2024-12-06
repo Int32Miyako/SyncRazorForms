@@ -10,12 +10,17 @@ public class AdoDisconnectedDataContext : IDataContext
         throw new NotImplementedException();
     }
 
-    public List<Product> SelectProducts()
+    public IList<Product?> SelectProducts()
     {
         throw new NotImplementedException();
     }
 
     public int InsertProduct(Product product)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int UpdateProduct(Product newProduct)
     {
         throw new NotImplementedException();
     }
@@ -45,7 +50,12 @@ public class AdoDisconnectedDataContext : IDataContext
     {
         throw new NotImplementedException();
     }
-    
+
+    public int UpdateCustomer(Customer customer)
+    {
+        throw new NotImplementedException();
+    }
+
 
     public int InsertCustomer(Product product)
     {
@@ -74,6 +84,11 @@ public class AdoDisconnectedDataContext : IDataContext
     }
 
     public int InsertOrder(Order order)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int UpdateOrder(Order order)
     {
         throw new NotImplementedException();
     }

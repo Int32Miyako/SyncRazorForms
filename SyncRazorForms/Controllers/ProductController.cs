@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SyncRazorForms.Data.Ado;
 using SyncRazorForms.Models;
 using SyncRazorForms.Models.ProductTypes;
 
@@ -7,20 +8,21 @@ namespace SyncRazorForms.Controllers;
 [Route("[controller]")]
 public class ProductController : ControllerBase
 {
-    public static readonly IndexModel IndexModel;
+    public static IndexModel? IndexModel = new IndexModel();
+    
     
     [HttpGet("get-products")]
-    public List<Product> GetProducts()
+    public List<Product>? GetProducts()
     {
-        var products = IndexModel.Products;
+        var products = IndexModel?.Products;
 
         return products;
     }
     
-    [HttpGet("get-product/{id}")]
+    [HttpGet("get-product/{id}")] 
     public Product? GetProduct([FromRoute]int id)
     {
-        var products = IndexModel.Products;
+        var products = IndexModel!.Products;
 
         return products.FirstOrDefault(t => t.Id == id);
     }
@@ -38,7 +40,7 @@ public class ProductController : ControllerBase
             Amount = 0
         };
 
-        IndexModel.Products.Add(newProduct);
+        IndexModel!.Products.Add(newProduct);
 
         return newProduct.Id;
     }
@@ -47,14 +49,15 @@ public class ProductController : ControllerBase
     [HttpPut("update-product")]
     public Product? UpdateProduct([FromBody] Product product)
     {
-        for (var i = 0; i < IndexModel.Products.Count; i++)
-        {
-            if (IndexModel.Products[i].Id == product.Id)
+        if (IndexModel != null)
+            for (var i = 0; i < IndexModel.Products.Count; i++)
             {
-                IndexModel.Products[i] = product;
-                return IndexModel.Products[i];
+                if (IndexModel.Products[i].Id == product.Id)
+                {
+                    IndexModel.Products[i] = product;
+                    return IndexModel.Products[i];
+                }
             }
-        }
 
         return null;
     }
@@ -64,7 +67,7 @@ public class ProductController : ControllerBase
     [HttpDelete("delete-product/{id}")]
     public void DeleteProduct([FromRoute] int id)
     {
-        IndexModel.Products = IndexModel.Products.Where(p => p.Id != id).ToList();
+        if (IndexModel != null) IndexModel.Products = IndexModel.Products.Where(p => p.Id != id).ToList();
     }
 
 
@@ -76,7 +79,7 @@ public class ProductController : ControllerBase
 
             var id = randomGenerator.Next(0, 1000000);
 
-            if (IndexModel.Products.Any(t => t.Id == id)) continue;
+            if (IndexModel != null && IndexModel.Products.Any(t => t.Id == id)) continue;
             return id;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
+using SyncRazorForms.Data.Ado;
 using SyncRazorForms.Models;
 
 namespace SyncRazorForms.Controllers;
@@ -16,6 +17,9 @@ public class HomeController : Controller
     
     public IActionResult Index()
     {
+        var adoProductController = new AdoProductController();
+        var products = adoProductController.GetProducts().ToList();
+        ProductController.IndexModel!.Products = products;
         
         return View(ProductController.IndexModel);
     }
