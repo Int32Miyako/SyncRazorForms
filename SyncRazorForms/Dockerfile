@@ -9,9 +9,9 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SyncRazorForms.csproj", "SyncRazorForms/"]
+COPY ["SyncRazorForms/SyncRazorForms.csproj", "SyncRazorForms/"]
 RUN dotnet restore "SyncRazorForms/SyncRazorForms.csproj"
-WORKDIR "/SyncRazorForms" 
+WORKDIR "/SyncRazorForms/SyncRazorForms" 
 COPY . .
 RUN dotnet build "SyncRazorForms.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
