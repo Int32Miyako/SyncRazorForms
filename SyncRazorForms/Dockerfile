@@ -11,7 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["SyncRazorForms.csproj", "SyncRazorForms/"]
 RUN dotnet restore "SyncRazorForms/SyncRazorForms.csproj"
-WORKDIR "/src/SyncRazorForms" 
+WORKDIR "/SyncRazorForms" 
 COPY . .
 RUN dotnet build "SyncRazorForms.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
