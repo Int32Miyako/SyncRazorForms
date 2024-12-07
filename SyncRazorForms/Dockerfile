@@ -1,23 +1,19 @@
-﻿#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-USER app
+﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 80
+EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SyncRazorForms.csproj", "SyncRazorForms/"]
-RUN dotnet restore "SyncRazorForms/SyncRazorForms.csproj"
-WORKDIR "/SyncRazorForms" 
-COPY . .
-RUN dotnet build "SyncRazorForms.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY ["SyncRazorForms/SyncRazorForms.csproj", "./"]
+RUN dotnet restore "SyncRazorForms.csproj"
+
+COPY SyncRazorForms ./SyncRazorForms
+WORKDIR /src/SyncRazorForms
+RUN dotnet build "SyncRazorForms.csproj" -c Release -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "SyncRazorForms.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "SyncRazorForms.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
