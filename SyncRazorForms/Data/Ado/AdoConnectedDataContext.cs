@@ -1,7 +1,5 @@
 ﻿using System.Data;
-using System.Drawing;
-using Microsoft.AspNetCore.Connections;
-using MySqlConnector;
+using Npgsql;
 using SyncRazorForms.Controllers;
 using SyncRazorForms.Models;
 using SyncRazorForms.Models.ProductTypes;
@@ -10,7 +8,6 @@ namespace SyncRazorForms.Data.Ado;
 
 public class AdoConnectedDataContext : IDataContext
 {
-
     private readonly DataSet _dataSet = new ();
     private readonly string _connectionString;
 
@@ -26,14 +23,14 @@ public class AdoConnectedDataContext : IDataContext
 
     private void InitializeDataSet()
     {
-        using var connection = new MySqlConnection(_connectionString);
+        using var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
 
         // Load Products table
-        var productsAdapter = new MySqlDataAdapter("SELECT * FROM ProductShop_DB.Products", connection);
+        var productsAdapter = new NpgsqlDataAdapter("SELECT * FROM \"Products\"", connection);
         productsAdapter.Fill(_dataSet, "Products");
 
-        // You can add similar code for Customers and Orders tables when needed
+        // Add code for Customers and Orders tables as needed
     }
 
     public Product? SelectProduct(int id)
@@ -43,11 +40,11 @@ public class AdoConnectedDataContext : IDataContext
         {
             return new Product
             {
-                Id = (int)productRow["product_id"],
+                Id = (long)productRow["product_id"],
                 Name = (string)productRow["name"],
                 Description = (string)productRow["description"],
-                Cost = (double)productRow["cost"],
-                Amount = (int)productRow["amount"]
+                Cost = (double)(long)productRow["cost"], // Ensure proper casting
+                Amount = (long)productRow["amount"]
             };
         }
 
@@ -63,32 +60,31 @@ public class AdoConnectedDataContext : IDataContext
             {
                 products.Add(new Product
                 {
-                    Id = (int)row["product_id"],
+                    Id = (long)row["product_id"],
                     Name = (string)row["name"],
                     Description = (string)row["description"],
-                    Cost = (double)row["cost"],
-                    Amount = (int)row["amount"]
+                    Cost = (double)(long)row["cost"], // Ensure proper casting
+                    Amount = (long)row["amount"]
                 });
             }
         }
 
         return products;
     }
-
     public int InsertProduct(Product product)
     {
-        using var connection = new MySqlConnection(_connectionString);
+        using var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
 
-        string query = "INSERT INTO products (product_id, name, description, cost, amount) VALUES (@Id, @Name, @Description, @Cost, @Amount);";
-        using var command = new MySqlCommand(query, connection);
-        
+        string query = "INSERT INTO \"Products\" (product_id, name, description, cost, amount) VALUES (@Id, @Name, @Description, @Cost, @Amount);";
+        using var command = new NpgsqlCommand(query, connection);
+
         command.Parameters.AddWithValue("@Id", product.Id);
         command.Parameters.AddWithValue("@Name", product.Name);
         command.Parameters.AddWithValue("@Description", product.Description);
         command.Parameters.AddWithValue("@Cost", product.Cost);
         command.Parameters.AddWithValue("@Amount", product.Amount);
-        
+
         command.ExecuteNonQuery();
 
         // Update DataSet
@@ -103,16 +99,16 @@ public class AdoConnectedDataContext : IDataContext
             Products?.Rows.Add(newRow);
         }
 
-        return product.Id;
+        return Convert.ToInt32(product.Id);
     }
 
     public int UpdateProduct(Product newProduct)
     {
-        using var connection = new MySqlConnection(_connectionString);
+        using var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
 
-        var command = new MySqlCommand(
-            "UPDATE ProductShop_DB.Products " +
+        var command = new NpgsqlCommand(
+            "UPDATE \"Products\" " +
             "SET name = @Name, " +
             "description = @Description, " +
             "cost = @Cost, " +
@@ -137,61 +133,35 @@ public class AdoConnectedDataContext : IDataContext
             productRow["amount"] = newProduct.Amount;
         }
 
-        return newProduct.Id;
+        return Convert.ToInt32(newProduct.Id);
     }
 
     public int DeleteProduct(int id)
     {
-        throw new NotImplementedException();
+        using var connection = new NpgsqlConnection(_connectionString);
+        connection.Open();
+
+        var command = new NpgsqlCommand("DELETE FROM \"Products\" WHERE product_id = @Id", connection);
+        command.Parameters.AddWithValue("@Id", id);
+
+        var affectedRows = command.ExecuteNonQuery();
+
+        // Update DataSet
+        var productRow = Products?.Select($"product_id = {id}").FirstOrDefault();
+        productRow?.Delete();
+
+        return affectedRows;
     }
 
-    public Customer? SelectCustomer(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IList<Customer?> SelectCustomers()
-    {
-        throw new NotImplementedException();
-    }
-
-    public int InsertCustomer(Customer customer)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int UpdateCustomer(Customer customer)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int DeleteCustomer(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Order? SelectOrder(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IList<Order?> SelectOrders()
-    {
-        throw new NotImplementedException();
-    }
-
-    public int InsertOrder(Order order)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int UpdateOrder(Order order)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int DeleteOrder(int id)
-    {
-        throw new NotImplementedException();
-    }
+    // Placeholders for other methods, not implemented
+    public Customer? SelectCustomer(int id) => throw new NotImplementedException();
+    public IList<Customer?> SelectCustomers() => throw new NotImplementedException();
+    public int InsertCustomer(Customer customer) => throw new NotImplementedException();
+    public int UpdateCustomer(Customer customer) => throw new NotImplementedException();
+    public int DeleteCustomer(int id) => throw new NotImplementedException();
+    public Order? SelectOrder(int id) => throw new NotImplementedException();
+    public IList<Order?> SelectOrders() => throw new NotImplementedException();
+    public int InsertOrder(Order order) => throw new NotImplementedException();
+    public int UpdateOrder(Order order) => throw new NotImplementedException();
+    public int DeleteOrder(int id) => throw new NotImplementedException();
 }

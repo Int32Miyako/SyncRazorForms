@@ -42,7 +42,7 @@ public class ProductController : ControllerBase
 
         IndexModel!.Products.Add(newProduct);
 
-        return newProduct.Id;
+        return Convert.ToInt32(newProduct.Id);
     }
     
     

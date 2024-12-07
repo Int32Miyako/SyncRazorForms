@@ -47,6 +47,10 @@
               "target": "Package",
               "version": "[2.4.0, )"
             },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.9.0, )"

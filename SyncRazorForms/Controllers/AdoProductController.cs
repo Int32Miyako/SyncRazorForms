@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
+using Npgsql;
 using SyncRazorForms.Data;
 using SyncRazorForms.Data.Ado;
 using SyncRazorForms.Models;
@@ -13,16 +14,16 @@ public class AdoProductController : ControllerBase
 
     public AdoProductController()
     {
-        var mySqlConnectionStringBuilder = new MySqlConnectionStringBuilder
+        var npgsqlConnectionStringBuilder = new NpgsqlConnectionStringBuilder
         {
-            Server = "127.127.126.26",
-            Port = 3306,
-            Database = "ProductShop_DB",
-            UserID = "root",
-            Password = ""
+            Host = "dpg-cta4pp56l47c73bhve1g-a.frankfurt-postgres.render.com",
+            Port = 5432, 
+            Database = "globaldb_4wbf",
+            Username = "globaldb_4wbf_user",
+            Password = "2ceO0bvsTcrY4oTGslx0WtOocZTB4pv7"
         };
 
-        _dataContext = new AdoConnectedDataContext(mySqlConnectionStringBuilder.ConnectionString);
+        _dataContext = new AdoConnectedDataContext(npgsqlConnectionStringBuilder.ConnectionString);
     }
     
 
@@ -69,7 +70,7 @@ public class AdoProductController : ControllerBase
 
         _dataContext.InsertProduct(newProduct);
 
-        return newProduct.Id;
+        return Convert.ToInt32(newProduct.Id);
     }
     
     
