@@ -121,7 +121,7 @@ function OnEditClick(id) {
 
 async function onEditCancelClick(id) {
     let finalElement = GetProductById(id);
-    let originalElement = await fetch(`Product/get-product/${id}`, {
+    let originalElement = await fetch(`AdoProduct/product/${id}`, {
         method : "GET"
     }).then(response => response.json());
     
