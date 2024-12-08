@@ -147,7 +147,7 @@ async function onEditSaveClick(id){
 
     console.log(JSON.stringify(product));
     
-    let response = await fetch(`Product/update-product`, {
+    let response = await fetch(`AdoProduct/product`, {
         method : "PUT",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
