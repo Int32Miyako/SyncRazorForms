@@ -168,7 +168,7 @@ async function onEditSaveClick(id){
 
 
 async function onCreateClick(){
-    let response = await fetch(`Product/create-product`, {
+    let response = await fetch(`AdoProduct/product`, {
         method : "POST"
     });
     

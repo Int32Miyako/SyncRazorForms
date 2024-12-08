@@ -40,11 +40,11 @@ public class AdoConnectedDataContext : IDataContext
         {
             return new Product
             {
-                Id = (long)productRow["product_id"],
+                Id = (int)productRow["product_id"],
                 Name = (string)productRow["name"],
                 Description = (string)productRow["description"],
-                Cost = (double)(long)productRow["cost"], // Ensure proper casting
-                Amount = (long)productRow["amount"]
+                Cost = (double)productRow["cost"], // Ensure proper casting
+                Amount = (int)productRow["amount"]
             };
         }
 
@@ -60,11 +60,11 @@ public class AdoConnectedDataContext : IDataContext
             {
                 products.Add(new Product
                 {
-                    Id = (long)row["product_id"],
+                    Id = (int)row["product_id"],
                     Name = (string)row["name"],
                     Description = (string)row["description"],
-                    Cost = (double)(long)row["cost"], // Ensure proper casting
-                    Amount = (long)row["amount"]
+                    Cost = (double)row["cost"], // Ensure proper casting
+                    Amount = (int)row["amount"]
                 });
             }
         }
@@ -76,14 +76,13 @@ public class AdoConnectedDataContext : IDataContext
         using var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
 
-        string query = "INSERT INTO \"Products\" (product_id, name, description, cost, amount) VALUES (@Id, @Name, @Description, @Cost, @Amount);";
+        string query = "INSERT INTO \"Products\" (name, description, cost, amount) VALUES (@Name, @Description, @Cost, @Amount);";
         using var command = new NpgsqlCommand(query, connection);
 
-        command.Parameters.AddWithValue("@Id", product.Id);
-        command.Parameters.AddWithValue("@Name", product.Name);
-        command.Parameters.AddWithValue("@Description", product.Description);
-        command.Parameters.AddWithValue("@Cost", product.Cost);
-        command.Parameters.AddWithValue("@Amount", product.Amount);
+        command.Parameters.AddWithValue("@Name", "");
+        command.Parameters.AddWithValue("@Description", "");
+        command.Parameters.AddWithValue("@Cost", 0);
+        command.Parameters.AddWithValue("@Amount", 0);
 
         command.ExecuteNonQuery();
 
@@ -99,7 +98,7 @@ public class AdoConnectedDataContext : IDataContext
             Products?.Rows.Add(newRow);
         }
 
-        return Convert.ToInt32(product.Id);
+        return product.Id;
     }
 
     public int UpdateProduct(Product newProduct)
@@ -133,7 +132,7 @@ public class AdoConnectedDataContext : IDataContext
             productRow["amount"] = newProduct.Amount;
         }
 
-        return Convert.ToInt32(newProduct.Id);
+        return newProduct.Id;
     }
 
     public int DeleteProduct(int id)

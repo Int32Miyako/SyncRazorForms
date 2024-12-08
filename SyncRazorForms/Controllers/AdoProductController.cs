@@ -33,7 +33,7 @@ public class AdoProductController : ControllerBase
         return _dataContext.SelectProducts();
     }
     
-    [HttpGet("get-product/{id}")]
+    [HttpGet("product/{id}")]
     public Product? GetProduct([FromRoute]int id)
     {
         return _dataContext.SelectProduct(id);
@@ -56,7 +56,7 @@ public class AdoProductController : ControllerBase
     
     
     
-    [HttpPost("create-product")] 
+    [HttpPost("product")] 
     public int CreateProduct()
     {
         var newProduct = new Product
@@ -74,7 +74,7 @@ public class AdoProductController : ControllerBase
     }
     
     
-    [HttpPut("update-product")]
+    [HttpPut("product")]
     public Product UpdateProduct([FromBody] Product productFromBody)
     {
         _dataContext.UpdateProduct(productFromBody);
@@ -84,21 +84,12 @@ public class AdoProductController : ControllerBase
 
     
 
-    [HttpDelete("delete-product/{id}")]
+    [HttpDelete("product/{id}")]
     public void DeleteProduct([FromRoute] int id)
     {
         _dataContext.DeleteProduct(id);
     }
 
 
-    private static int CreateId()
-    {
-        while (true)
-        {
-            var randomGenerator = new Random();
-            var id = randomGenerator.Next(0, 1000000);
-
-            return id;
-        }
-    }
+    
 }
