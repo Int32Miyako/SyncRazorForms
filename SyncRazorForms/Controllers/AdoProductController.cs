@@ -45,11 +45,6 @@ public class AdoProductController : ControllerBase
         return _dataContext.InsertProduct(product);
     }
 
-    [HttpPut("products")]
-    public int UpdateProducts([FromBody] Product newProduct)
-    {
-        return _dataContext.UpdateProduct(newProduct);
-    }
     
     
     

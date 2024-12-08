@@ -224,7 +224,7 @@ function addProductToUI(id) {
 }
 
 async function onDeleteClick(id){
-    let response = await fetch(`Product/delete-product/${id}`, {
+    let response = await fetch(`AdoProduct/product/${id}`, {
         method : "DELETE"
     })
 
