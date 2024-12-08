@@ -181,7 +181,7 @@ async function onCreateClick(){
 
 
 async function onGetProductClick(id){
-    await fetch(`Product/get-product/${id}`, {
+    await fetch(`AdoProduct/product/${id}`, {
         method : "GET"
     })
         .then(response => response.json())
