@@ -7,7 +7,7 @@ using SyncRazorForms.Models;
 
 namespace SyncRazorForms.Controllers;
 
-[Route("[controller]")]
+[Route("[controller]/product")]
 public class AdoProductController : ControllerBase
 {
     private readonly IDataContext _dataContext;
@@ -27,28 +27,22 @@ public class AdoProductController : ControllerBase
     }
     
 
-    [HttpGet("products")]
+    [HttpGet] // все продукты
     public IList<Product?> GetProducts()
     {
         return _dataContext.SelectProducts();
     }
     
-    [HttpGet("product/{id}")]
+    [HttpGet("{id}")]
     public Product? GetProduct([FromRoute]int id)
     {
         return _dataContext.SelectProduct(id);
     }
 
-    [HttpPost("products")]
-    public int InsertProducts([FromBody] Product product)
-    {
-        return _dataContext.InsertProduct(product);
-    }
-
+   
     
     
-    
-    [HttpPost("product")] 
+    [HttpPost] 
     public int CreateProduct()
     {
         var id = _dataContext.InsertProduct(new Product
@@ -63,7 +57,7 @@ public class AdoProductController : ControllerBase
     }
     
     
-    [HttpPut("product")]
+    [HttpPut]
     public Product UpdateProduct([FromBody] Product productFromBody)
     {
         _dataContext.UpdateProduct(productFromBody);
@@ -73,7 +67,7 @@ public class AdoProductController : ControllerBase
 
     
 
-    [HttpDelete("product/{id}")]
+    [HttpDelete("{id}")]
     public void DeleteProduct([FromRoute] int id)
     {
         _dataContext.DeleteProduct(id);
