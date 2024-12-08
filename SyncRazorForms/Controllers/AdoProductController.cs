@@ -53,24 +53,18 @@ public class AdoProductController : ControllerBase
     
     
     
-    
-    
-    
     [HttpPost("product")] 
     public int CreateProduct()
     {
-        var newProduct = new Product
+        var id = _dataContext.InsertProduct(new Product
         {
-            Id = CreateId(),
             Name = "",
             Description = "",
-            Cost = 0, 
+            Cost = 0,
             Amount = 0
-        };
+        });
 
-        _dataContext.InsertProduct(newProduct);
-
-        return Convert.ToInt32(newProduct.Id);
+        return id;
     }
     
     

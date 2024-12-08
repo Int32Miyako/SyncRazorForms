@@ -76,21 +76,27 @@ public class AdoConnectedDataContext : IDataContext
         using var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
 
-        string query = "INSERT INTO \"Products\" (name, description, cost, amount) VALUES (@Name, @Description, @Cost, @Amount);";
+        // Запрос с RETURNING для получения сгенерированного product_id
+        string query = "INSERT INTO \"Products\" (name, description, cost, amount) " +
+                       "VALUES (@Name, @Description, @Cost, @Amount) " +
+                       "RETURNING \"product_id\";";
+    
         using var command = new NpgsqlCommand(query, connection);
 
-        command.Parameters.AddWithValue("@Name", "");
-        command.Parameters.AddWithValue("@Description", "");
-        command.Parameters.AddWithValue("@Cost", 0);
-        command.Parameters.AddWithValue("@Amount", 0);
+        // Добавление параметров для запроса
+        command.Parameters.AddWithValue("@Name", product.Name);
+        command.Parameters.AddWithValue("@Description", product.Description);
+        command.Parameters.AddWithValue("@Cost", product.Cost);
+        command.Parameters.AddWithValue("@Amount", product.Amount);
 
-        command.ExecuteNonQuery();
+        // Получение сгенерированного идентификатора
+        var generatedProductId = (int)command.ExecuteScalar();  // Получаем значение первого столбца первой строки результата
 
-        // Update DataSet
+        // Обновление DataSet
         var newRow = Products?.NewRow();
         if (newRow != null)
         {
-            newRow["product_id"] = product.Id;
+            newRow["product_id"] = generatedProductId;  // Используем сгенерированный product_id
             newRow["name"] = product.Name;
             newRow["description"] = product.Description;
             newRow["cost"] = product.Cost;
@@ -98,8 +104,10 @@ public class AdoConnectedDataContext : IDataContext
             Products?.Rows.Add(newRow);
         }
 
-        return product.Id;
+        // Возвращаем сгенерированный product_id
+        return generatedProductId;
     }
+
 
     public int UpdateProduct(Product newProduct)
     {
