@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SyncRazorForms.Models;
 
 [Table("Customers")]
-public sealed class CustomerModel
+public class CustomerModel
 {
     [Key]
     [Column("customer_id")]
@@ -25,5 +25,5 @@ public sealed class CustomerModel
     [MaxLength(100)]
     public string? Country { get; set; }
 
-    public List<OrderModel>? Orders { get; set; } = new();
+    public virtual List<OrderModel>? Orders { get; set; } = new();
 }

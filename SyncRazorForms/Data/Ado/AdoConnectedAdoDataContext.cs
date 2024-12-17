@@ -43,7 +43,7 @@ public class AdoConnectedAdoDataContext : IAdoDataContext
                 Id = (int)productRow["product_id"],
                 Name = (string)productRow["name"],
                 Description = (string)productRow["description"],
-                Price = (decimal)productRow["cost"], 
+                Price = (int)productRow["cost"], 
                 Amount = (int)productRow["amount"]
             };
         }
@@ -63,7 +63,7 @@ public class AdoConnectedAdoDataContext : IAdoDataContext
                     Id = (int)row["product_id"],
                     Name = (string)row["name"],
                     Description = (string)row["description"],
-                    Price = (decimal)row["cost"],
+                    Price = (int)row["cost"],
                     Amount = (int)row["amount"]
                 });
             }

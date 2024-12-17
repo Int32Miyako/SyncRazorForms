@@ -22,7 +22,7 @@ public class ProductModel
     public string? Description { get; init; }
 
     [Column("price")]
-    public decimal Price { get; init; }
+    public int Price { get; init; }
 
     [Column("amount")]
     public int Amount { get; init; }

@@ -1,0 +1,53 @@
+﻿@model List<CustomerModel>;
+
+@{
+    ViewData["Title"] = "Customers";
+    var customers = Model;
+}
+
+<div class="text-center">
+    <table id="productList">
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Страна проживания</th>
+            <th>Действие</th>
+        </tr>
+
+        @foreach (var customer in customers)
+        {
+            <tr id="product_id_@(customer.Id)">
+                <td> <div id="id_text_id_@(customer.Id)">@customer.Id</div> </td>
+                
+                <td> <div id="name_text_id_@(customer.Id)">@customer.FirstName</div> </td>
+                
+                <td> <div id="description_text_id_@(customer.Id)">@customer.LastName</div> </td>
+                
+                <td> <div id="cost_text_id_@(customer.Id)">@customer.Age</div> </td>
+                
+                <td> <div id="amount_text_id_@(customer.Id)">@customer.Country</div> </td>
+                
+                
+                <td>
+                    <div class="buttons-container">
+                        <button onclick="OnEditClick(@customer.Id)" id="editButton_id_@(customer.Id)" >📝</button>
+                        <button onclick="onEditSaveClick(@customer.Id)" id="yesButton_id_@(customer.Id)" style="display: none;">✅</button>
+                        <button onclick="onEditCancelClick(@customer.Id)" id="noButton_id_@(customer.Id)" style="display: none;" >❌</button>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button onclick="onDeleteClick(@customer.Id)" id="deleteButton_id_@(customer.Id)">⌫</button> 
+                        <button onclick="onGetProductClick(@customer.Id)" id="getButton_id_@(customer.Id)">👁</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="cube">
+        <button class="button" id="createButton_id" onclick="onCreateClick()">➕</button>
+    </div>
+    
+</div>

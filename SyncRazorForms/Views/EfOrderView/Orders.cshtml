@@ -1,0 +1,57 @@
+﻿@model List<OrderModel>;
+
+@{
+    ViewData["Title"] = "Orders";
+    var orders = Model;
+}
+
+<div class="text-center">
+    <table id="productList">
+        <tr>
+            <th>Id</th>
+            <th>CustomerId</th>
+            <th>Products</th>
+            <th>Amount</th>
+        </tr>
+
+        @foreach (var order in orders)
+        {
+            <tr id="product_id_@(order.Id)">
+                <td> <div id="id_text_id_@(order.Id)">@order.CustomerId</div> </td>
+                
+                <td>
+                    <ul id="products_list_id_@(order.Id)">
+                        @if (order.Products != null)
+                        {
+                            foreach (var product in order.Products)
+                            {
+                                <li>@product.Name (Кол-во: @product.Amount)</li>
+                            }
+                        }
+                    </ul>
+                </td>
+                
+                <td> <div id="price_text_id_@(order.Id)">@order.Amount</div> </td>
+                
+                
+                <td>
+                    <div class="buttons-container">
+                        <button onclick="OnEditClick(@order.Id)" id="editButton_id_@(order.Id)" >📝</button>
+                        <button onclick="onEditSaveClick(@order.Id)" id="yesButton_id_@(order.Id)" style="display: none;">✅</button>
+                        <button onclick="onEditCancelClick(@order.Id)" id="noButton_id_@(order.Id)" style="display: none;" >❌</button>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button onclick="onDeleteClick(@order.Id)" id="deleteButton_id_@(order.Id)">⌫</button> 
+                        <button onclick="onGetProductClick(@order.Id)" id="getButton_id_@(order.Id)">👁</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="cube">
+        <button class="button" id="createButton_id" onclick="onCreateClick()">➕</button>
+    </div>
+    
+</div>

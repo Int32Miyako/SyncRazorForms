@@ -1,3 +1,4 @@
+/* Основные стили для шрифта на всей странице */
 html {
   font-size: 14px;
 }
@@ -8,38 +9,43 @@ html {
   }
 }
 
+/* Общие стили для html и body */
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 60px; /* Добавляем нижний отступ для футера */
 }
 
+/* Стили для таблицы */
 table {
-  width: 100%; /* Задает ширину таблицы */
+  width: 100%; /* Таблица занимает всю доступную ширину */
   border-collapse: collapse; /* Убирает двойные границы между ячейками */
   text-align: left; /* Выравнивание текста в ячейках по левому краю */
   font-family: 'Arial', sans-serif; /* Шрифт текста */
+  table-layout: fixed; /* Фиксированное расположение ячеек */
 }
 
 th, td {
-  border: 1px solid #bbb; /* Граница ячеек в серых тонах */
+  border: 1px solid #bbb; /* Граница ячеек */
   padding: 8px; /* Отступы вокруг текста внутри ячеек */
 }
 
+/* Заголовки таблицы */
 th {
-  background-color: #ddd; /* Серый фон для заголовков таблицы */
-  color: #333; /* Темно-серый цвет текста заголовков таблицы */
+  background-color: #ddd; /* Серый фон для заголовков */
+  color: #333; /* Темно-серый цвет текста заголовков */
 }
 
+/* Чередование фона строк */
 tr:nth-child(even) {
-  background-color: #eee; /* Более светлый оттенок серого для четных строк */
+  background-color: #eee; /* Светлый фон для четных строк */
 }
 
 tr:hover {
-  background-color: #ccc; /* Более темный оттенок серого при наведении мышью на строку */
+  background-color: #ccc; /* Более темный фон при наведении */
 }
 
 /* Стилизация заголовка таблицы */
@@ -48,12 +54,11 @@ caption {
   font-size: 24px;
   font-weight: bold;
   text-align: left;
-  background-color: #f3f3f3; /* Светлый серый фон для заголовка таблицы */
-  color: #222; /* Цвет текста заголовка */
+  background-color: #f3f3f3;
+  color: #222;
 }
 
-
-
+/* Футер на фиксированном месте */
 .footer {
   position: fixed;
   left: 0;
@@ -61,43 +66,211 @@ caption {
   width: 100%;
   text-align: center;
   padding: 10px 0;
-  background-color: black; /* Или любой другой цвет в соответствии с вашим дизайном */
-  color: white; /* Или другой цвет текста */
-  z-index: 1000; /* Убедитесь, что футер будет поверх других элементов. */
+  background-color: black; /* Черный фон */
+  color: white;
+  z-index: 1000; /* Слой поверх остальных элементов */
 }
 
+/* Контейнер для кнопок */
 .buttons-container {
   display: flex;
-  gap: 10px;
+  gap: 10px; /* Отступ между кнопками */
   margin-bottom: 5px;
 }
 
-.button-inline {
-  display: inline-block;
-}
-
-
-
+/* Стили для кнопки с добавлением товара */
 .cube {
-  width: 250px; /* Ширина кубика */
-  height: 100px; /* Высота кубика */
+  position: fixed;
+  bottom: 60px; /* Расположение кнопки чуть выше нижней части экрана */
+  right: 20px; /* Отступ от правого края */
+  z-index: 1000; /* Убедитесь, что кнопка отображается поверх */
+  width: 250px; /* Ширина кнопки */
+  height: 100px; /* Высота кнопки */
   display: flex;
-  align-items: center; /* Вертикальное центрирование внутри кубика */
-  justify-content: center; /* Горизонтальное центрирование внутри кубика */
-  margin-bottom: 5px; /* Отступ снизу */
+  align-items: center; /* Центрирование кнопки по вертикали */
+  justify-content: center; /* Центрирование кнопки по горизонтали */
   text-align: center;
+  margin-bottom: 5px;
   margin-left: auto;
   margin-right: auto;
 }
 
+/* Кнопка + для добавления товара */
 .button {
-  padding: 1px 10px; /* Отступы для кнопки */
-  font-size: 50px; /* Размер текста кнопки */
-  color: white; /* Цвет текста кнопки */
-  background-color: #ffffff; /* Цвет фона кнопки */
-  border: none; /* Без границы */
-  border-radius: 5px; /* Сглаживание углов */
-  cursor: pointer; /* Курсор при наведении */
-  
+  font-size: 24px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #adb5bd;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+.button:hover {
+  background-color: #868e96; /* Немного темнее при наведении */
+  transform: scale(1.1); /* Легкое увеличение при наведении */
+}
+
+.button:active {
+  transform: scale(0.95); /* Уменьшение при нажатии */
+}
+
+/* Минимизация ширины колонок ID и Действия */
+#productList td:first-child, #productList th:first-child {
+  width: 50px; /* Фиксированная ширина для колонки с ID */
+  text-align: center; /* Выравнивание по центру */
+}
+
+#productList td:last-child, #productList th:last-child {
+  width: 120px; /* Уменьшаем ширину колонки с действиями */
+  text-align: center; /* Выравнивание по центру */
+}
+
+/* Стили для кнопок в колонке с действиями */
+.buttons-container button {
+  font-size: 12px; /* Уменьшаем размер шрифта */
+  padding: 4px 6px; /* Уменьшаем отступы кнопок */
+  margin: 0 3px; /* Уменьшаем расстояние между кнопками */
+}
+
+/* Стили для кнопки + в контейнере cube */
+.cube {
+  right: 20px; /* Позиционирование кнопки */
+}
+
+/* Уменьшаем ширину ячеек таблицы */
+td, th {
+  width: 150px; /* Устанавливаем фиксированную ширину для ячеек */
+  max-width: 150px; /* Максимальная ширина ячеек */
+  word-wrap: break-word; /* Перенос длинных слов на новую строку */
+  overflow: hidden; /* Прячет переполнение текста */
+}
+
+/* Стили для input и textarea */
+input, textarea {
+  width: 100%; /* Полная ширина внутри ячеек */
+  box-sizing: border-box; /* Учитываем padding и border */
+  border: 1px solid #bbb;
+  padding: 5px;
+}
+
+textarea {
+  min-height: 30px; /* Минимальная высота для textarea */
+}
+
+/* Контейнер для кнопки с добавлением товара */
+.cube {
+  position: fixed;
+  bottom: 60px; /* Кнопка чуть выше нижней части экрана */
+  right: 20px; /* Отступ от правого края */
+  z-index: 1000; /* Убедитесь, что кнопка отображается поверх */
+  width: 60px; /* Ширина кубика */
+  height: 60px; /* Высота кубика */
+  display: flex;
+  align-items: center; /* Центрирование кнопки по вертикали */
+  justify-content: center; /* Центрирование кнопки по горизонтали */
+  text-align: center;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Кнопка + для добавления товара */
+.button {
+  font-size: 24px;
+  width: 50px; /* Устанавливаем ширину для кнопки */
+  height: 50px; /* Устанавливаем высоту для кнопки */
+  border-radius: 50%; /* Делаем кнопку круглой */
+  padding: 10px 15px;
+  border: none;
+  background-color: black; /* Черный фон */
+  color: white; /* Белый цвет текста */
+  display: flex;
+  align-items: center; /* Центрирование символа внутри кнопки */
+  justify-content: center; /* Центрирование символа внутри кнопки */
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Эффекты при наведении и нажатии */
+.button:hover {
+  background-color: #333; /* Темный оттенок при наведении */
+  transform: scale(1.1); /* Легкое увеличение при наведении */
+}
+
+.button:active {
+  transform: scale(0.95); /* Уменьшение при нажатии */
+}
+/* Стили для верхней панели */
+.header {
+  background-color: black; /* Черный фон */
+  color: white; /* Белый текст */
+  display: flex;
+  justify-content: space-between; /* Разделяем блоки по сторонам */
+  align-items: center; /* Вертикальное центрирование */
+  padding: 10px 20px; /* Отступы вокруг текста */
+}
+
+/* Логотип (название магазина) */
+.logo {
+  font-size: 24px; /* Размер шрифта */
+  font-weight: bold; /* Жирный шрифт */
+}
+
+/* Стили для навигации */
+.nav-links ul {
+  list-style-type: none; /* Убираем маркеры у списка */
+  margin: 0; /* Убираем внешние отступы */
+  padding: 0; /* Убираем внутренние отступы */
+  display: flex; /* Выводим элементы в строку */
+}
+
+.nav-links li {
+  margin-left: 20px; /* Отступ между пунктами меню */
+}
+
+.nav-links a {
+  text-decoration: none; /* Убираем подчеркивание ссылок */
+  color: white; /* Белый цвет текста */
+  font-size: 16px; /* Размер шрифта */
+  transition: color 0.3s ease; /* Плавный переход для цвета */
+}
+
+.nav-links a:hover {
+  color: #adb5bd; /* Цвет при наведении (светло-серый) */
+}
+/* Стили для верхней панели */
+header {
+  background-color: black; /* Черный фон */
+  color: white; /* Белый текст */
+}
+
+/* Стили для логотипа */
+.navbar-brand {
+  color: white !important; /* Белый цвет для логотипа */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Навигационные ссылки */
+.navbar-nav .nav-item .nav-link {
+  color: white !important; /* Белый цвет для текста ссылок */
+  font-size: 16px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #adb5bd !important; /* Светлый серый цвет при наведении */
+}
+
+/* Кнопка для меню на мобильных устройствах */
+.navbar-toggler-icon {
+  background-color: white; /* Белая иконка для кнопки на мобильных устройствах */
+}
+
+/* Окончательное выравнивание и отступы */
+.navbar-collapse {
+  justify-content: space-between; /* Равномерное распределение элементов */
+}
