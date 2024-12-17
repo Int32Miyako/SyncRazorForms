@@ -3,4 +3,4 @@
     image: syncrazorforms
     build:
       context: .
-      dockerfile: StrongerThanYou/Dockerfile
+      dockerfile: SyncRazorForms/Dockerfile

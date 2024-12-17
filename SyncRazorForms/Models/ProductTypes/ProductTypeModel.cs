@@ -1,6 +1,6 @@
 ﻿namespace SyncRazorForms.Models.ProductTypes;
 
-public enum ProductType
+public enum ProductTypeModel
 {
     Book,
     Food,

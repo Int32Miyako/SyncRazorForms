@@ -6,12 +6,12 @@ using SyncRazorForms.Models.ProductTypes;
 
 namespace SyncRazorForms.Data.Ado;
 
-public class AdoConnectedDataContext : IDataContext
+public class AdoConnectedAdoDataContext : IAdoDataContext
 {
     private readonly DataSet _dataSet = new ();
     private readonly string _connectionString;
 
-    public AdoConnectedDataContext(string connectionString)
+    public AdoConnectedAdoDataContext(string connectionString)
     {
         _connectionString = connectionString;
         InitializeDataSet();
@@ -33,17 +33,17 @@ public class AdoConnectedDataContext : IDataContext
         // Add code for Customers and Orders tables as needed
     }
 
-    public Product? SelectProduct(int id)
+    public ProductModel? SelectProduct(int id)
     {
         var productRow = Products?.Select($"product_id = {id}").FirstOrDefault();
         if (productRow != null)
         {
-            return new Product
+            return new ProductModel
             {
                 Id = (int)productRow["product_id"],
                 Name = (string)productRow["name"],
                 Description = (string)productRow["description"],
-                Cost = (double)productRow["cost"], // Ensure proper casting
+                Price = (decimal)productRow["cost"], 
                 Amount = (int)productRow["amount"]
             };
         }
@@ -51,19 +51,19 @@ public class AdoConnectedDataContext : IDataContext
         return null;
     }
 
-    public IList<Product?> SelectProducts()
+    public IList<ProductModel?> SelectProducts()
     {
-        var products = new List<Product>();
+        var products = new List<ProductModel>();
         if (Products != null)
         {
             foreach (DataRow row in Products.Rows)
             {
-                products.Add(new Product
+                products.Add(new ProductModel
                 {
                     Id = (int)row["product_id"],
                     Name = (string)row["name"],
                     Description = (string)row["description"],
-                    Cost = (double)row["cost"], // Ensure proper casting
+                    Price = (decimal)row["cost"],
                     Amount = (int)row["amount"]
                 });
             }
@@ -71,7 +71,7 @@ public class AdoConnectedDataContext : IDataContext
 
         return products;
     }
-    public int InsertProduct(Product product)
+    public int InsertProduct(ProductModel productModel)
     {
         using var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
@@ -84,10 +84,10 @@ public class AdoConnectedDataContext : IDataContext
         using var command = new NpgsqlCommand(query, connection);
 
         // Добавление параметров для запроса
-        command.Parameters.AddWithValue("@Name", product.Name);
-        command.Parameters.AddWithValue("@Description", product.Description);
-        command.Parameters.AddWithValue("@Cost", product.Cost);
-        command.Parameters.AddWithValue("@Amount", product.Amount);
+        command.Parameters.AddWithValue("@Name", productModel.Name);
+        command.Parameters.AddWithValue("@Description", productModel.Description);
+        command.Parameters.AddWithValue("@Cost", productModel.Price);
+        command.Parameters.AddWithValue("@Amount", productModel.Amount);
 
         // Получение сгенерированного идентификатора
         var generatedProductId = (int)command.ExecuteScalar();  // Получаем значение первого столбца первой строки результата
@@ -97,10 +97,10 @@ public class AdoConnectedDataContext : IDataContext
         if (newRow != null)
         {
             newRow["product_id"] = generatedProductId;  // Используем сгенерированный product_id
-            newRow["name"] = product.Name;
-            newRow["description"] = product.Description;
-            newRow["cost"] = product.Cost;
-            newRow["amount"] = product.Amount;
+            newRow["name"] = productModel.Name;
+            newRow["description"] = productModel.Description;
+            newRow["cost"] = productModel.Price;
+            newRow["amount"] = productModel.Amount;
             Products?.Rows.Add(newRow);
         }
 
@@ -109,7 +109,7 @@ public class AdoConnectedDataContext : IDataContext
     }
 
 
-    public int UpdateProduct(Product newProduct)
+    public int UpdateProduct(ProductModel newProductModel)
     {
         using var connection = new NpgsqlConnection(_connectionString);
         connection.Open();
@@ -122,25 +122,25 @@ public class AdoConnectedDataContext : IDataContext
             "amount = @Amount " +
             "WHERE product_id = @Id", connection);
 
-        command.Parameters.AddWithValue("@Name", newProduct.Name);
-        command.Parameters.AddWithValue("@Description", newProduct.Description);
-        command.Parameters.AddWithValue("@Cost", newProduct.Cost);
-        command.Parameters.AddWithValue("@Amount", newProduct.Amount);
-        command.Parameters.AddWithValue("@Id", newProduct.Id);
+        command.Parameters.AddWithValue("@Name", newProductModel.Name);
+        command.Parameters.AddWithValue("@Description", newProductModel.Description);
+        command.Parameters.AddWithValue("@Cost", newProductModel.Price);
+        command.Parameters.AddWithValue("@Amount", newProductModel.Amount);
+        command.Parameters.AddWithValue("@Id", newProductModel.Id);
 
         command.ExecuteNonQuery();
 
         // Update DataSet
-        var productRow = Products?.Select($"product_id = {newProduct.Id}").FirstOrDefault();
+        var productRow = Products?.Select($"product_id = {newProductModel.Id}").FirstOrDefault();
         if (productRow != null)
         {
-            productRow["name"] = newProduct.Name;
-            productRow["description"] = newProduct.Description;
-            productRow["cost"] = newProduct.Cost;
-            productRow["amount"] = newProduct.Amount;
+            productRow["name"] = newProductModel.Name;
+            productRow["description"] = newProductModel.Description;
+            productRow["cost"] = newProductModel.Price;
+            productRow["amount"] = newProductModel.Amount;
         }
 
-        return newProduct.Id;
+        return newProductModel.Id;
     }
 
     public int DeleteProduct(int id)
@@ -161,14 +161,14 @@ public class AdoConnectedDataContext : IDataContext
     }
 
     // Placeholders for other methods, not implemented
-    public Customer? SelectCustomer(int id) => throw new NotImplementedException();
-    public IList<Customer?> SelectCustomers() => throw new NotImplementedException();
-    public int InsertCustomer(Customer customer) => throw new NotImplementedException();
-    public int UpdateCustomer(Customer customer) => throw new NotImplementedException();
+    public CustomerModel? SelectCustomer(int id) => throw new NotImplementedException();
+    public IList<CustomerModel?> SelectCustomers() => throw new NotImplementedException();
+    public int InsertCustomer(CustomerModel customerModel) => throw new NotImplementedException();
+    public int UpdateCustomer(CustomerModel customerModel) => throw new NotImplementedException();
     public int DeleteCustomer(int id) => throw new NotImplementedException();
-    public Order? SelectOrder(int id) => throw new NotImplementedException();
-    public IList<Order?> SelectOrders() => throw new NotImplementedException();
-    public int InsertOrder(Order order) => throw new NotImplementedException();
-    public int UpdateOrder(Order order) => throw new NotImplementedException();
+    public OrderModel? SelectOrder(int id) => throw new NotImplementedException();
+    public IList<OrderModel?> SelectOrders() => throw new NotImplementedException();
+    public int InsertOrder(OrderModel orderModel) => throw new NotImplementedException();
+    public int UpdateOrder(OrderModel newOrderModel) => throw new NotImplementedException();
     public int DeleteOrder(int id) => throw new NotImplementedException();
 }

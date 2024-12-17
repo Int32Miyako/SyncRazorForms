@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
 using Npgsql;
 using SyncRazorForms.Data;
 using SyncRazorForms.Data.Ado;
 using SyncRazorForms.Models;
 
-namespace SyncRazorForms.Controllers;
+namespace SyncRazorForms.Controllers.Ado;
 
 [Route("[controller]/product")]
 public class AdoProductController : ControllerBase
 {
-    private readonly IDataContext _dataContext;
+    private readonly IAdoDataContext _adoDataContext;
 
     public AdoProductController()
     {
@@ -23,20 +22,20 @@ public class AdoProductController : ControllerBase
             Password = "2ceO0bvsTcrY4oTGslx0WtOocZTB4pv7"
         };
 
-        _dataContext = new AdoConnectedDataContext(npgsqlConnectionStringBuilder.ConnectionString);
+        _adoDataContext = new AdoConnectedAdoDataContext(npgsqlConnectionStringBuilder.ConnectionString);
     }
     
 
     [HttpGet] // все продукты
-    public IList<Product?> GetProducts()
+    public IList<ProductModel?> GetProducts()
     {
-        return _dataContext.SelectProducts();
+        return _adoDataContext.SelectProducts();
     }
     
     [HttpGet("{id}")]
-    public Product? GetProduct([FromRoute]int id)
+    public ProductModel? GetProduct([FromRoute]int id)
     {
-        return _dataContext.SelectProduct(id);
+        return _adoDataContext.SelectProduct(id);
     }
 
    
@@ -45,11 +44,11 @@ public class AdoProductController : ControllerBase
     [HttpPost] 
     public int CreateProduct()
     {
-        var id = _dataContext.InsertProduct(new Product
+        var id = _adoDataContext.InsertProduct(new ProductModel
         {
             Name = "",
             Description = "",
-            Cost = 0,
+            Price = 0,
             Amount = 0
         });
 
@@ -58,11 +57,11 @@ public class AdoProductController : ControllerBase
     
     
     [HttpPut]
-    public Product UpdateProduct([FromBody] Product productFromBody)
+    public ProductModel UpdateProduct([FromBody] ProductModel productModelFromBody)
     {
-        _dataContext.UpdateProduct(productFromBody);
+        _adoDataContext.UpdateProduct(productModelFromBody);
     
-        return productFromBody;
+        return productModelFromBody;
     }
 
     
@@ -70,7 +69,7 @@ public class AdoProductController : ControllerBase
     [HttpDelete("{id}")]
     public void DeleteProduct([FromRoute] int id)
     {
-        _dataContext.DeleteProduct(id);
+        _adoDataContext.DeleteProduct(id);
     }
 
 

@@ -1,0 +1,53 @@
+﻿@model List<ProductModel>;
+
+@{
+    ViewData["Title"] = "Products";
+    var products = Model;
+}
+
+<div class="text-center">
+    <table id="productList">
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Кол-во</th>
+            <th>Действие</th>
+        </tr>
+
+        @foreach (var product in products)
+        {
+            <tr id="product_id_@(product.Id)">
+                <td> <div id="id_text_id_@(product.Id)">@product.Id</div> </td>
+                
+                <td> <div id="name_text_id_@(product.Id)">@product.Name</div> </td>
+                
+                <td> <div id="description_text_id_@(product.Id)">@product.Description</div> </td>
+                
+                <td> <div id="cost_text_id_@(product.Id)">@product.Price</div> </td>
+                
+                <td> <div id="amount_text_id_@(product.Id)">@product.Amount</div> </td>
+                
+                
+                <td>
+                    <div class="buttons-container">
+                        <button onclick="OnEditClick(@product.Id)" id="editButton_id_@(product.Id)" >📝</button>
+                        <button onclick="onEditSaveClick(@product.Id)" id="yesButton_id_@(product.Id)" style="display: none;">✅</button>
+                        <button onclick="onEditCancelClick(@product.Id)" id="noButton_id_@(product.Id)" style="display: none;" >❌</button>
+                    </div>
+
+                    <div class="buttons-container">
+                        <button onclick="onDeleteClick(@product.Id)" id="deleteButton_id_@(product.Id)">⌫</button> 
+                        <button onclick="onGetProductClick(@product.Id)" id="getButton_id_@(product.Id)">👁</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="cube">
+        <button class="button" id="createButton_id" onclick="onCreateClick()">➕</button>
+    </div>
+    
+</div>

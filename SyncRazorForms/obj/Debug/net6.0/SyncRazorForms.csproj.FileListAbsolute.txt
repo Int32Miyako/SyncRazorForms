@@ -356,3 +356,17 @@ C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms\bin\Debug\net6.0\System.Collections.Immutable.dll

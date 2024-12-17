@@ -121,7 +121,7 @@ function OnEditClick(id) {
 
 async function onEditCancelClick(id) {
     let finalElement = GetProductById(id);
-    let originalElement = await fetch(`AdoProduct/product/${id}`, {
+    let originalElement = await fetch(`EFProduct/product/${id}`, {
         method : "GET"
     }).then(response => response.json());
     
@@ -147,7 +147,7 @@ async function onEditSaveClick(id){
 
     console.log(JSON.stringify(product));
     
-    let response = await fetch(`AdoProduct/product`, {
+    let response = await fetch(`EFProduct/product`, {
         method : "PUT",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -168,7 +168,7 @@ async function onEditSaveClick(id){
 
 
 async function onCreateClick(){
-    let response = await fetch(`AdoProduct/product`, {
+    let response = await fetch(`EFProduct/product`, {
         method : "POST"
     });
     
@@ -181,7 +181,7 @@ async function onCreateClick(){
 
 
 async function onGetProductClick(id){
-    await fetch(`AdoProduct/product/${id}`, {
+    await fetch(`EFProduct/product/${id}`, {
         method : "GET"
     })
         .then(response => response.json())
@@ -224,7 +224,7 @@ function addProductToUI(id) {
 }
 
 async function onDeleteClick(id){
-    let response = await fetch(`AdoProduct/product/${id}`, {
+    let response = await fetch(`EFProduct/product/${id}`, {
         method : "DELETE"
     })
 

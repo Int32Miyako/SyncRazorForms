@@ -4,9 +4,9 @@ namespace SyncRazorForms.Models;
 
 public class IndexModel
 {
-    public List<Product?> Products { get; set; } = new List<Product>();
-    public List<Order> Orders { get; set; } = new List<Order>();
-    public List<Customer> Customers { get; set; } = new List<Customer>();
+    public List<ProductModel> Products { get; set; } = new List<ProductModel>();
+    public List<OrderModel> Orders { get; set; } = new List<OrderModel>();
+    public List<CustomerModel> Customers { get; set; } = new List<CustomerModel>();
     
     
 }

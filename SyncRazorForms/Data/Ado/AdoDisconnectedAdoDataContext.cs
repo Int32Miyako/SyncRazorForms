@@ -3,24 +3,24 @@ using SyncRazorForms.Models.ProductTypes;
 
 namespace SyncRazorForms.Data.Ado;
 
-public class AdoDisconnectedDataContext : IDataContext
+public class AdoDisconnectedAdoDataContext : IAdoDataContext
 {
-    public Product? SelectProduct(int id)
+    public ProductModel? SelectProduct(int id)
     {
         throw new NotImplementedException();
     }
 
-    public IList<Product?> SelectProducts()
+    public IList<ProductModel?> SelectProducts()
     {
         throw new NotImplementedException();
     }
 
-    public int InsertProduct(Product product)
+    public int InsertProduct(ProductModel productModel)
     {
         throw new NotImplementedException();
     }
 
-    public int UpdateProduct(Product newProduct)
+    public int UpdateProduct(ProductModel newProductModel)
     {
         throw new NotImplementedException();
     }
@@ -35,29 +35,29 @@ public class AdoDisconnectedDataContext : IDataContext
         throw new NotImplementedException();
     }
 
-    public Customer? SelectCustomer(int id)
+    public CustomerModel? SelectCustomer(int id)
     {
         throw new NotImplementedException();
     }
 
-    public IList<Customer?> SelectCustomers()
+    public IList<CustomerModel?> SelectCustomers()
     {
         throw new NotImplementedException();
     }
     
 
-    public int InsertCustomer(Customer customer)
+    public int InsertCustomer(CustomerModel customerModel)
     {
         throw new NotImplementedException();
     }
 
-    public int UpdateCustomer(Customer customer)
+    public int UpdateCustomer(CustomerModel customerModel)
     {
         throw new NotImplementedException();
     }
 
 
-    public int InsertCustomer(Product product)
+    public int InsertCustomer(ProductModel productModel)
     {
         throw new NotImplementedException();
     }
@@ -72,28 +72,28 @@ public class AdoDisconnectedDataContext : IDataContext
         throw new NotImplementedException();
     }
 
-    public Order? SelectOrder(int id)
+    public OrderModel? SelectOrder(int id)
     {
         throw new NotImplementedException();
     }
     
 
-    public IList<Order?> SelectOrders()
+    public IList<OrderModel?> SelectOrders()
     {
         throw new NotImplementedException();
     }
 
-    public int InsertOrder(Order order)
+    public int InsertOrder(OrderModel orderModel)
     {
         throw new NotImplementedException();
     }
 
-    public int UpdateOrder(Order order)
+    public int UpdateOrder(OrderModel newOrderModel)
     {
         throw new NotImplementedException();
     }
 
-    public int InsertOrder(Product product)
+    public int InsertOrder(ProductModel productModel)
     {
         throw new NotImplementedException();
     }
