@@ -15,24 +15,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\Богдан\RiderProjects\SyncRazorForms\SyncRazorForms
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/EfProduct/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWZQcm9kdWN0XEluZGV4LmNzaHRtbA==
+[C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/EfProductView/Products.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWZQcm9kdWN0Vmlld1xQcm9kdWN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/Home/Orders.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxPcmRlcnMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/Home/Users.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2Vycy5jc2h0bWw=
+[C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/OrderView/Orders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJWaWV3XE9yZGVycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/Shared/Error.cshtml]
@@ -41,6 +37,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/UserView/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclZpZXdcVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Богдан/RiderProjects/SyncRazorForms/SyncRazorForms/Views/_ViewImports.cshtml]

@@ -1,14 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
-using SyncRazorForms.Controllers.Ado;
-using SyncRazorForms.Controllers.EntityFramework;
-using SyncRazorForms.Controllers.Temp;
-using SyncRazorForms.Data.Ado;
-using SyncRazorForms.Data.EF;
 using SyncRazorForms.Models;
 
-namespace SyncRazorForms.Controllers;
+namespace SyncRazorForms.Controllers.EntityFramework.View;
 
 public class HomeController : Controller
 {
@@ -31,7 +25,6 @@ public class HomeController : Controller
     }
     
     
-
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

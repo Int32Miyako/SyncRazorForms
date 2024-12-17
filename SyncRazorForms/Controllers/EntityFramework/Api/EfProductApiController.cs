@@ -3,20 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using SyncRazorForms.Data.EF;
 using SyncRazorForms.Models;
 
-namespace SyncRazorForms.Controllers.EntityFramework;
+namespace SyncRazorForms.Controllers.EntityFramework.Api;
 
-[Route("[controller]/product")]
-public class EfProductController : Controller
+[Route("api/EfProductApi")]
+public class EfProductApiController : ControllerBase
 {
  
     private readonly EfDataContext _dataContext;
     
-    public EfProductController(EfDataContext dataContext)
+    public EfProductApiController(EfDataContext dataContext)
     {
         _dataContext = dataContext;
     }
-
- 
     
     [HttpGet]
     public List<ProductModel> GetProducts()
@@ -33,10 +31,8 @@ public class EfProductController : Controller
     }
     
     [HttpPost] 
-    public ObjectResult CreateProduct()
+    public int CreateProduct()
     {
-        try
-        {
             var product = new ProductModel
             {
                 Name = "",
@@ -45,13 +41,7 @@ public class EfProductController : Controller
                 Amount = 0
             };
 
-            return Ok(_dataContext.InsertProduct(product));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Ошибка: {ex.Message}");
-            return StatusCode(500, "Произошла ошибка на сервере");
-        }
+            return _dataContext.InsertProduct(product);
     }
     
     [HttpPut]
@@ -69,14 +59,5 @@ public class EfProductController : Controller
     }
     
     
-    [HttpGet("view")]
-    public IActionResult Index()
-    {
-        var products = _dataContext.Products
-            .AsNoTracking()
-            .ToList();
-        
-        return View(products); // Передаем список продуктов в представление
-    }
-    
+   
 }
