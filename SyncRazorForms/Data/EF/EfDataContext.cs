@@ -18,14 +18,14 @@ public sealed class EfDataContext : DbContext, IEfDataContext
     public DbSet<AccessoriesModel> Accessories { get; init; }
 
     
-    //private readonly IConfiguration _configuration;
+    private readonly IConfiguration _configuration;
     
-     //public EfDataContext(IConfiguration configuration, DbContextOptions<EfDataContext> options)
-     //    : base(options)
-     //{
-     //    //_configuration = configuration;
-//
-     //}
+public EfDataContext(IConfiguration configuration, DbContextOptions<EfDataContext> options)
+    : base(options)
+{
+    _configuration = configuration;
+
+}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
