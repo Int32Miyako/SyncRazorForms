@@ -18,14 +18,14 @@ public sealed class EfDataContext : DbContext, IEfDataContext
     public DbSet<AccessoriesModel> Accessories { get; init; }
 
     
-    private readonly IConfiguration _configuration;
+    //private readonly IConfiguration _configuration;
     
-     public EfDataContext(IConfiguration configuration, DbContextOptions<EfDataContext> options)
-         : base(options)
-     {
-         _configuration = configuration;
-
-     }
+     //public EfDataContext(IConfiguration configuration, DbContextOptions<EfDataContext> options)
+     //    : base(options)
+     //{
+     //    //_configuration = configuration;
+//
+     //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,12 +46,12 @@ public sealed class EfDataContext : DbContext, IEfDataContext
         // странный и безполезный вызов метода
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.LogTo(Console.WriteLine);
-        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("RenderDB"));
-    }
-    
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    optionsBuilder.LogTo(Console.WriteLine);
+    //    optionsBuilder.UseNpgsql(_configuration.GetConnectionString("RenderDB"));
+    //}
+   
    /// <summary>
    /// Customers
    /// </summary>

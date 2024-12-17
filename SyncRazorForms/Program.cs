@@ -11,12 +11,13 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<EfDataContext>();
+//builder.Services.AddScoped<EfDataContext>();
 
-//builder.Services.AddDbContext<EfDataContext>(options =>
-//{
-//    options.UseNpgsql(builder.Configuration.GetConnectionString("RenderDB"));
-//});
+builder.Services.AddDbContext<EfDataContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("RenderDB"))
+        .LogTo(Console.WriteLine);
+});
 
 var app = builder.Build();
 
