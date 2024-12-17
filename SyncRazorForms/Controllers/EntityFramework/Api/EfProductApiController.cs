@@ -16,13 +16,7 @@ public class EfProductApiController : ControllerBase
         _dataContext = dataContext;
     }
     
-    [HttpGet]
-    public List<ProductModel> GetProducts()
-    {
-        return _dataContext.Products
-            .AsNoTracking()
-            .ToList();                                                                                                                
-    }
+  
     
     [HttpGet("{id:int}")]
     public ProductModel? GetProduct([FromRoute]int id)
