@@ -13,14 +13,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<EfDataContext>();
 
-builder.Services.AddDbContext<EfDataContext>(options =>
-{
-    options.UseNpgsql();
-});
-
-
-builder.Services.AddDbContext<EfDataContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("RenderDB")));
+//builder.Services.AddDbContext<EfDataContext>(options =>
+//{
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("RenderDB"));
+//});
 
 var app = builder.Build();
 
