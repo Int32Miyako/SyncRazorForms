@@ -11,20 +11,10 @@ public class AdoProductController : ControllerBase
 {
     private readonly IAdoDataContext _adoDataContext;
 
-    public AdoProductController()
+    public AdoProductController(IAdoDataContext adoDataContext)
     {
-        var npgsqlConnectionStringBuilder = new NpgsqlConnectionStringBuilder
-        {
-            Host = "dpg-cta4pp56l47c73bhve1g-a.frankfurt-postgres.render.com",
-            Port = 5432, 
-            Database = "globaldb_4wbf",
-            Username = "globaldb_4wbf_user",
-            Password = "2ceO0bvsTcrY4oTGslx0WtOocZTB4pv7"
-        };
-
-        _adoDataContext = new AdoConnectedAdoDataContext(npgsqlConnectionStringBuilder.ConnectionString);
+        _adoDataContext = adoDataContext;
     }
-    
 
     [HttpGet] // все продукты
     public IList<ProductModel?> GetProducts()

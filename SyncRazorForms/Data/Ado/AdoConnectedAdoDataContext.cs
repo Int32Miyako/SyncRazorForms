@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Reflection;
 using Npgsql;
 using SyncRazorForms.Controllers;
 using SyncRazorForms.Models;
@@ -11,9 +12,9 @@ public class AdoConnectedAdoDataContext : IAdoDataContext
     private readonly DataSet _dataSet = new ();
     private readonly string _connectionString;
 
-    public AdoConnectedAdoDataContext(string connectionString)
+    public AdoConnectedAdoDataContext(IConfiguration configuration)
     {
-        _connectionString = connectionString;
+        _connectionString = configuration.GetConnectionString("RenderDB");
         InitializeDataSet();
     }
 
