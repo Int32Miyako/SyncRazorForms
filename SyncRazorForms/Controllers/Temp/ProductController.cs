@@ -65,7 +65,9 @@ public class ProductController : ControllerBase
     [HttpDelete("delete-product/{id}")]
     public void DeleteProduct([FromRoute] int id)
     {
-        if (IndexModel != null) IndexModel.Products = IndexModel.Products!.Where(p => p.Id != id).ToList();
+        if (IndexModel != null) IndexModel.Products =
+            IndexModel.Products!.Where(p => p.Id != id)
+                .ToList();
     }
 
 
